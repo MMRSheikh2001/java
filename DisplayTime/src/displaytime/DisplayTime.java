@@ -11,6 +11,8 @@ public class DisplayTime {
         System.out.println("Enter Second : ");
         Scanner input = new Scanner(System.in);
         
+        
+        
         int seconds = input.nextInt();
         
         int minutes = seconds/60;
