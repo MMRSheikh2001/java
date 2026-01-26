@@ -6,6 +6,7 @@ public class FirstJavaProgram {
 
     public static void main(String[] args) {
 //        Scanner input =new Scanner(System.in);
+//          Scanner output =new Scanner(System.in);
 //        
 //        System.out.println("Please Enter Radius ");
 //        
@@ -24,16 +25,13 @@ public class FirstJavaProgram {
 //
 //        area = (float) 3.14159 * radius * radius;
 //        System.out.println("Area of the circle is : " + area);
-        
         System.out.println("What is your name?");
-        Scanner output =new Scanner(System.in);
-        
-        
+        Scanner output = new Scanner(System.in);
+
         String names = output.nextLine();
-        
+
         System.out.println("My name is " + names);
-                
-                
+
     }
 
 }
