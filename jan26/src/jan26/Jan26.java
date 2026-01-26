@@ -16,11 +16,10 @@ public class Jan26 {
 //        double numberc = numbera + numberb;
 //        System.out.println("The sum is : " + numberc);
 
-//        System.out.println("What is your Name?");
-//        Scanner input = new Scanner(System.in);
-//        String myName = input.nextLine();
-//        System.out.println("Your Name is "+ myName);
+        System.out.println("What is your Name?");
+        Scanner input = new Scanner(System.in);
+        String myName = input.nextLine();
+        System.out.println("Your Name is " + myName);
 
-
-      
+    }
 }
