@@ -2,7 +2,7 @@ package jan26;
 
 import java.util.Scanner;
 
-public class Jan26 {
+public class homePractice {
 
     public static void main(String[] args) {
 //        System.out.println("Give 1st Number ");
@@ -20,6 +20,8 @@ public class Jan26 {
         Scanner input = new Scanner(System.in);
         String myName = input.nextLine();
         System.out.println("Your Name is " + myName);
+        
+        
 
     }
 }
