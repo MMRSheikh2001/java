@@ -11,6 +11,7 @@ public class Jan27 {
         
         int i = 10;
         i++;
+        i+=5;
         Scanner input = new Scanner(System.in);
         System.out.println(++i);
         
