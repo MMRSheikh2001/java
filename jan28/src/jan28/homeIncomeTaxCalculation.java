@@ -108,7 +108,7 @@ public class homeIncomeTaxCalculation {
             }
         } else {
 
-            System.out.println("Invalid ");
+            System.err.println("Invalid ");
         }
 
     }
