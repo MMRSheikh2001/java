@@ -11,6 +11,7 @@ import java.util.Scanner;
  * @author Mahbub
  */
 public class triangle {
+
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         System.out.println("Give 1st triangle side length");
@@ -19,19 +20,25 @@ public class triangle {
         float side2 = s.nextFloat();
         System.out.println("Give 3rd triangle side length");
         float side3 = s.nextFloat();
-        if(side1 == side2 || side2 == side3 || side1 ==side3){
-        if(side1 == side2 && side2 ==side3){
-        
-            System.out.println("Its a Equilateral Triangle");
+
+        if ((side1 + side2) > side3 || (side3 + side2) > side1 || (side1 + side3) > side2) {
+            System.out.println("It's a valid triangle");
+            if (side1 == side2 || side2 == side3 || side1 == side3) {
+                if (side1 == side2 && side2 == side3) {
+
+                    System.out.println("Its a Equilateral Triangle");
+                } else {
+
+                    System.out.println("Its a Isosceles Triangle");
+                }
+            } else {
+                System.out.println("Its a Scalene Triangle");
+            }
+
+        } else {
+            System.out.println("Impossible triangle \n The sum of length of two triangle's sides must be bigger than the largest side's length");
         }
-        else{
-        
-            System.out.println("Its a Isosceles Triangle");
-        }
-        }
-        else{
-            System.out.println("Its a Scalene Triangle");
-        }
+
     }
-    
+
 }
