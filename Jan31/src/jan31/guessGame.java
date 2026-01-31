@@ -28,6 +28,9 @@ public class guessGame {
             }
             chance--;
         }
+//        if(flag){
+//            System.out.println("Better luck next time");
+//        }
         System.out.println("The actual Number was " + randomNumber);
 
     }
