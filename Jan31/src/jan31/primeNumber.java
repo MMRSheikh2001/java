@@ -11,24 +11,24 @@ import java.util.Scanner;
  * @author Admin
  */
 public class primeNumber {
-    
+
     public static void main(String[] args) {
         System.out.println("Give the Number");
         Scanner s = new Scanner(System.in);
         int num = s.nextInt();
         int count = 0;
-        for(int i = 1;i<= num;i++){
-            if(num % i == 0){
-            count =count + 1;
+        for (int i = 1; i <= num; i++) {
+            if (num % i == 0) {
+                count = count + 1;
             }
         }
-        
-        if(count ==2){
+
+        if (count == 2) {
             System.out.println("It is Prime Number");
-            
-        } else{
-        System.out.println("It is Not Prime Number");
+
+        } else {
+            System.out.println("It is Not Prime Number");
         }
     }
-    
+
 }
