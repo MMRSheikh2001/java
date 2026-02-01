@@ -18,6 +18,8 @@ public class Feb1 {
             m = i * m;
         }
         return m;
+        
+     //   for(int item : 5){}
     }
 
 }
