@@ -33,13 +33,12 @@ public class homePrimeNumberCheck {
     public static void primeNumbers(int numbers[]) {
         int s = numbers.length;
 
-        
         for (int i = 0; i < s; i++) {
             int count = 0;
-            for(int j =1; j<=numbers[i];j++){
-            if (numbers[i] % j == 0) {
-                count++;
-            }
+            for (int j = 1; j <= numbers[i]; j++) {
+                if (numbers[i] % j == 0) {
+                    count++;
+                }
             }
             if (count != 2) {
                 numbers[i] = 0;
