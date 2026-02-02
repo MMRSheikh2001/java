@@ -48,26 +48,26 @@ public class Feb2 {
         }
         System.out.println("Max Number is " + max);
     }
-    
-    public static void findMinNumber(int number[]){
-    int min = number[0];
-    for(int item : number){
-    if(item<=min){
-    min= item;
+
+    public static void findMinNumber(int number[]) {
+        int min = number[0];
+        for (int item : number) {
+            if (item <= min) {
+                min = item;
+            }
+        }
+        System.out.println("Min Number is " + min);
     }
-    }
-     System.out.println("Min Number is " + min);
-    }
-    public static void findAverage(int number[]){
-    int count = 0;
-    int sum =0;
-        for(int item : number){
-        sum = item + sum;
-        count++;
+
+    public static void findAverage(int number[]) {
+        int count = number.length;
+        int sum = 0;
+        for (int item : number) {
+            sum = item + sum;
         }
         double avg = sum / count;
-        System.out.println("The average is " +avg);
-    
+        System.out.println("The average is " + avg);
+
     }
 
 }
