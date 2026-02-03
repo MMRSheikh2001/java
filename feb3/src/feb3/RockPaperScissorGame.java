@@ -20,27 +20,25 @@ public class RockPaperScissorGame {
         int userInput = s.nextInt();
 
         //11       System.out.println(random);
-        if (random == 0 || random == 3 || random == 6 || random == 9) {
+        if (random == 0 || random == 1 || random == 4 || random == 7) {
             random = 1;
             System.out.println("System says \"Rock\"");
-        } else if (random == 1 || random == 4 || random == 7) {
+        } else if (random == 2 || random == 5 || random == 8) {
             random = 2;
             System.out.println("System says \"Paper\"");
         } else {
             random = 3;
             System.out.println("System says \"Scissor\"");
         }
-        if(userInput == random){
+        if (userInput == random) {
             System.out.println("It's a draw");
-        }
-        else if((userInput ==1 && random ==3) || (userInput ==2 && random ==1)||(userInput ==3 && random ==2)){
+        } else if ((userInput == 1 && random == 3) || (userInput == 2 && random == 1) || (userInput == 3 && random == 2)) {
             System.out.println("You Win");
+        } else {
+            System.out.println("You Lose");
+
         }
-        else{
-        System.out.println("You Lose");
-                
-        }
-            
+
     }
 
 }
