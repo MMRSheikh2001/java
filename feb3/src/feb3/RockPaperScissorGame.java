@@ -11,16 +11,12 @@ package feb3;
 public class RockPaperScissorGame {
 
     public static void main(String[] args) {
-        int[] numbers = {3, -1, 7, 0, 9};
+        int random = (int) (10 * Math.random());
 
-        for (int n : numbers) {
-            if (n < 0) {
-                continue; // skip negative numbers
-            }
-            if (n == 0) {
-                break; // stop loop when zero is found
-            }
-            System.out.println(n);
+        System.out.println(random);
+
+        if (random == 0 || random == 3 || random == 6 || random == 9) {
+            random = 0;
         }
     }
 

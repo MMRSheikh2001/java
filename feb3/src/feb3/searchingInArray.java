@@ -10,7 +10,7 @@ public class searchingInArray {
         int numbers[]={12,34,34,232,23,43,54};
         int search = 232;
         int indexNo= linearSearch(numbers, search);
-        System.out.println(indexNo);
+        System.out.println("Index no is " + indexNo);
         
     }
     public static int linearSearch(int[] array,int searchNumber){
