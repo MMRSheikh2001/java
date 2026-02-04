@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Admin
  */
 public class binarySearching {
-    
+
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         System.out.println("Give the array length");
@@ -27,11 +27,12 @@ public class binarySearching {
         System.out.println("Give the number whose index position you want in array");
         int userSearchingNumber = s.nextInt();
         linearSearch(numbers, userSearchingNumber);
-        
+
         sort(numbers);
-        
+        binarySearch(numbers, userSearchingNumber);
+
     }
-    
+
     public static void sort(int array[]) {
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = 0; j < array.length - 1 - i; j++) {
@@ -45,17 +46,32 @@ public class binarySearching {
         }
         System.out.println("The ascending order sorted array is " + Arrays.toString(array));
     }
-    
-    public static int binarySearch(int array[], int searchNumber) {
+
+    public static void binarySearch(int array[], int searchNumber) {
         int firstIndex = 0;
         int lastIndex = array.length - 1;
-        int midIndex = (int) (firstIndex + lastIndex) / 2;
-        int indexPosition = 0;
-        for (int i = 0; i <= midIndex; i++) {
+
+        boolean found = false;
+        for (int i = 0; i <= array.length; i++) {
+            int midIndex = (int) (firstIndex + lastIndex) / 2;
+            if (searchNumber >= array[midIndex]) {
+                firstIndex = midIndex;
+                if (searchNumber == array[midIndex]) {
+                    System.out.println("The Number is found in Index position " + midIndex);
+                    found = true;
+                    break;
+                }
+            } else {
+                lastIndex = midIndex;
+            }
+
         }
-        return 0;
+        if (!found) {
+            System.out.println("Search Number not found");
+        }
+
     }
-    
+
     public static void linearSearch(int array[], int searchNumber) {
         boolean found = false;
         for (int i = 0; i < array.length; i++) {
@@ -69,5 +85,5 @@ public class binarySearching {
             System.out.println("The Number is not found in Array");
         }
     }
-    
+
 }
