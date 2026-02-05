@@ -32,9 +32,9 @@ public class multiDimensionalArray {
 
         Scanner scan = new Scanner(System.in);
         System.out.println("Give the array values ");
-        for (int row= 0; row< numbers.length;row++) {
-            for (int col= 0; col< numbers[row].length;col++) {
-      System.out.println("Give the value of "+ (row+1) +"th row and "+(col+1)+"th column ");
+        for (int row = 0; row < numbers.length; row++) {
+            for (int col = 0; col < numbers[row].length; col++) {
+                System.out.println("Give the value of " + (row + 1) + "th row and " + (col + 1) + "th column ");
                 numbers[row][col] = scan.nextInt();
             }
         }
