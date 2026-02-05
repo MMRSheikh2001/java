@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package feb3;
 
 import java.util.Arrays;
@@ -29,7 +26,9 @@ public class binarySearching {
         linearSearch(numbers, userSearchingNumber);
 
         sort(numbers);
-        binarySearch(numbers, userSearchingNumber);
+        
+        
+        System.out.println("The binary Search index  position is " + binarySearch(numbers, userSearchingNumber));
 
     }
 
@@ -47,30 +46,56 @@ public class binarySearching {
         System.out.println("The ascending order sorted array is " + Arrays.toString(array));
     }
 
-    public static void binarySearch(int array[], int searchNumber) {
-        int firstIndex = 0;
-        int lastIndex = array.length - 1;
-
-        boolean found = false;
-        for (int i = 0; i <= array.length; i++) {
-            int midIndex = (int) (firstIndex + lastIndex) / 2;
-            if (searchNumber >= array[midIndex]) {
-                firstIndex = midIndex;
-                if (searchNumber == array[midIndex]) {
-                    System.out.println("The Number is found in Index position " + midIndex);
-                    found = true;
-                    break;
-                }
+//    public static void binarySearch(int array[], int searchNumber) {
+//        int firstIndex = 0;
+//        int lastIndex = array.length - 1;
+//
+//        boolean found = false;
+//        for (int i = 0; i <= array.length; i++) {
+//            int midIndex = (int) (firstIndex + lastIndex) / 2;
+//            if (searchNumber >= array[midIndex]) {
+//                firstIndex = midIndex;
+//                if (searchNumber == array[midIndex]) {
+//                    System.out.println("The Number is found in Index position " + midIndex);
+//                    found = true;
+//                    break;
+//                }
+//            } else {
+//                lastIndex = midIndex;
+//            }
+//
+//        }
+//        if (!found) {
+//            System.out.println("Search Number not found");
+//        }
+//
+//    }
+    
+    
+    
+    
+    
+    public static int binarySearch(int[] list, int key) {
+        int low = 0;
+        int high = list.length - 1;
+        
+        while (high >= low) {
+            
+            int mid = (low + high) / 2;
+            if (key < list[mid]) {
+                high = mid - 1;
+            } else if (key == list[mid]) {
+                return mid;
             } else {
-                lastIndex = midIndex;
+                low = mid + 1;
             }
-
+            
         }
-        if (!found) {
-            System.out.println("Search Number not found");
-        }
-
+        return -1; // Not found
     }
+    
+    
+    
 
     public static void linearSearch(int array[], int searchNumber) {
         boolean found = false;
