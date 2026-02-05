@@ -30,14 +30,15 @@ public class multiDimensionalArray {
 
         System.out.println(Arrays.deepToString(numbers));
 
-//        Scanner scan = new Scanner(System.in);
-//        System.out.println("Give the array values ");
-//        for (int i= 0; i< numbers.length;i++) {
-//            for (int s= 0; s< numbers[i].length;s++) {
-//                numbers[i][s] = scan.nextInt();
-//            }
-//        }
-//        System.out.println(Arrays.deepToString(numbers));
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Give the array values ");
+        for (int row= 0; row< numbers.length;row++) {
+            for (int col= 0; col< numbers[row].length;col++) {
+      System.out.println("Give the value of "+ (row+1) +"th row and "+(col+1)+"th column ");
+                numbers[row][col] = scan.nextInt();
+            }
+        }
+        System.out.println(Arrays.deepToString(numbers));
         for (int item[] : numbers) {
             for (int single : item) {
                 System.out.print(single + "\t");
