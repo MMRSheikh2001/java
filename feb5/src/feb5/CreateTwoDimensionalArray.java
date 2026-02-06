@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author Admin
  */
 public class CreateTwoDimensionalArray {
-    
+
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
         System.out.println("Enter row  Size");
@@ -24,5 +24,5 @@ public class CreateTwoDimensionalArray {
         }
         System.out.println(Arrays.deepToString(numbers));
     }
-    
+
 }
