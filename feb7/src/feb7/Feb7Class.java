@@ -1,4 +1,3 @@
-
 package feb7;
 
 /**
@@ -7,9 +6,8 @@ package feb7;
  */
 public class Feb7Class {
 
-    
     public static void main(String[] args) {
         
     }
-    
+
 }
