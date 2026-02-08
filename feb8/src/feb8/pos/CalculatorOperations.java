@@ -57,11 +57,5 @@ public class CalculatorOperations {
     public void setHeight(float height) {
         this.height = height;
     }
-    
-    
-    
-    
-    
-    
-    
+
 }
