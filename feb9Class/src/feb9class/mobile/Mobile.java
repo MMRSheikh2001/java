@@ -6,7 +6,11 @@ package feb9class.mobile;
  */
 public class Mobile {
 
-    private String call, message, games, camera, gallery;
+    String call;
+    String message;
+    String games;
+
+    private String camera, gallery;
 
     public Mobile() {
     }

@@ -50,7 +50,7 @@ public class FeaturePhone extends Mobile {
 
     @Override
     public String toString() {
-        return "FeaturePhone{" + "button=" + button + ", snakeGame=" + snakeGame + ", radio=" + radio + '}';
+        return "FeaturePhone{" + "button=" + button + ", snakeGame=" + snakeGame + ", radio=" + radio + '}' ;
     }
 
 }
