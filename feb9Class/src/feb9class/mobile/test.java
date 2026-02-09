@@ -16,8 +16,10 @@ public class test {
         int i = s.nextInt();
         double d= s.nextDouble();
         String st = s.nextLine();
+        String ab = s.nextLine();
         
-        System.out.println(i+" "+ d + st);
+        System.out.println(i+" "+ d + st + ab);
+        System.out.println(ab);
     }
     
 }
