@@ -33,10 +33,11 @@ public class Account {
 
     public void deposit() {
         System.out.println("The deposit is " + deposit);
+        balance += deposit;
     }
 
     public double displayAccountInfo() {
-        return balance += deposit;
+        return balance ;
     }
 
 }
