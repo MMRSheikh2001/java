@@ -29,13 +29,11 @@ public class SavingsAccount extends Account {
         this.year = year;
     }
 
-   
-    
-    public void addInterest() {
-         double interest = balance * this.year * this.interestRate / 100;
-         super.balance +=interest;
-         
-        System.out.println(super.balance);
+    public double addInterest() {
+        double interest = balance * this.year * this.interestRate / 100;
+        balance += interest;
+
+        return balance;
     }
 
 //    @Override
@@ -43,5 +41,4 @@ public class SavingsAccount extends Account {
 // super.balance = (super.balance + (super.balance * this.year * this.interestRate / 100));
 //        return super.balance;
 //    }
-
 }

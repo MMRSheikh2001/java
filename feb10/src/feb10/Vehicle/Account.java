@@ -36,8 +36,19 @@ public class Account {
         balance += deposit;
     }
 
+   // public void setBalance(double balance) {
+   //     this.balance = balance;
+   // }
+    
+    
+
     public double displayAccountInfo() {
-        return balance ;
+        return balance;
+    }
+    
+    public double displayAccountInfoAfterInterest(){
+   
+    return balance;
     }
 
 }
