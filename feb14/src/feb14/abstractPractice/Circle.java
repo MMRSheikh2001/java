@@ -1,5 +1,6 @@
-
 package feb14.abstractPractice;
+
+import java.util.Date;
 
 /**
  *
@@ -7,18 +8,35 @@ package feb14.abstractPractice;
  */
 public class Circle extends Geometry {
 
+    private double radius;
+
+    public Circle() {
+    }
+
+    public Circle(boolean filled, Date dateCreated) {
+        super(filled, dateCreated);
+    }
+
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+
     @Override
     public double getArea() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return Math.PI * Math.pow(radius, 2);
     }
 
     @Override
     public double getPerimeter() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return Math.PI * 2 * radius;
     }
-    
-    
-    
-    
-    
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+
 }
