@@ -1,6 +1,8 @@
 package feb14;
 
+import feb14.abstractPractice.Chicken;
 import feb14.abstractPractice.Circle;
+import feb14.abstractPractice.Edible;
 import feb14.abstractPractice.Geometry;
 import feb14.abstractPractice.Rectangle;
 
@@ -11,6 +13,8 @@ import feb14.abstractPractice.Rectangle;
 public class Feb14 {
 
     public static void main(String[] args) {
+        
+        //Abstract practice
         Geometry gCircle = new Circle(5);
         System.out.println(gCircle.getArea());
         System.out.println(gCircle.getPerimeter());
@@ -18,6 +22,11 @@ public class Feb14 {
         Geometry gRect = new Rectangle(20, 25);
         System.out.println(gRect.getArea());
         System.out.println(gRect.getPerimeter());
+        
+        //Interface Practice
+        
+        Chicken chi = new Chicken();
+        chi.getFat();
 
     }
 

@@ -10,4 +10,5 @@ package feb14.abstractPractice;
  */
 public interface Edible {
     public abstract String howToEat();
+    public void getFat();
 }
