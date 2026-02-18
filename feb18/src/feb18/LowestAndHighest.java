@@ -20,7 +20,7 @@ public class LowestAndHighest {
             System.out.println("Give The " + (i + 1) + "th Number");
             numbers[i] = sc.nextDouble();
         }
-
+        System.out.println(Arrays.toString(numbers));
 //        Arrays.sort(numbers);
 //        System.out.println("The lowest Number is "+ numbers[0]);
 //        System.out.println("The highest Number is "+ numbers[4]);
