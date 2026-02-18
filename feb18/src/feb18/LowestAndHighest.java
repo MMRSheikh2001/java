@@ -24,19 +24,35 @@ public class LowestAndHighest {
 //        Arrays.sort(numbers);
 //        System.out.println("The lowest Number is "+ numbers[0]);
 //        System.out.println("The highest Number is "+ numbers[4]);
-        double max = 0;
-        for (int i = 0; i < 4; i++) {
-            if (numbers[i] >= numbers[i + 1]) {
+//        for (int i = 0; i < 4; i++) {
+//            if (numbers[i] >= numbers[i + 1]) {
+//                double temp = numbers[i];
+//                numbers[i] = numbers[i + 1];
+//                numbers[i + 1] = temp;
+//            }
+//        }
+//        System.out.println("The Highest Number is " + numbers[4]);
+//        for (int i = 0; i < 4; i++) {
+//            if (numbers[i] <= numbers[i + 1]) {
+//                double temp = numbers[i];
+//                numbers[i] = numbers[i + 1];
+//                numbers[i + 1] = temp;
+//            }
+//        }
+//        System.out.println("The lowest Number is " + numbers[4]);
+        double max = numbers[0];
+        double min = numbers[0];
+
+        for (int i = 1; i < numbers.length; i++) {
+            if (numbers[i] > max) {
                 max = numbers[i];
             }
-        }
-        System.out.println("The Highest Number is " + max);
-        for (int i = 0; i < 4; i++) {
-            if (numbers[i] <= numbers[i + 1]) {
-                numbers[i + 1] = numbers[i];
+            if (numbers[i] < min) {
+                min = numbers[i];
             }
         }
-        System.out.println("The lowest Number is " + numbers[4]);
+        System.out.println("The highest number is " + max);
+        System.out.println("The lowest number is " + min);
 
     }
 }
