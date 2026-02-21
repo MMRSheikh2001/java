@@ -13,6 +13,8 @@ public class Feb19examPractice {
 
     public static void main(String[] args) {
         Truck tr = new Truck(3400, 500000);
+//        tr.weight=3400;
+//        tr.regularPrice= 450000;
         System.out.println("Truck Sale Price is " + tr.getSalePrice());
 
         Factorial fl = new Factorial(5);
