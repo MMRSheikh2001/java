@@ -16,6 +16,11 @@ public class MapsHash {
         examScores.put("Physics", 81);
         examScores.put("Chemistry", 91);
         
+        examScores.putIfAbsent("ICT", 89);
+        examScores.replace("Math", 94);
+        
         System.out.println(examScores.toString());
+        System.out.println(examScores.get("Math"));
+        System.out.println(examScores.getOrDefault("Religion", 35));
     }
 }
