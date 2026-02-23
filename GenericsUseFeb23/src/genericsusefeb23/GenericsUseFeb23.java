@@ -18,7 +18,7 @@ public class GenericsUseFeb23 {
         Student s1 = new Student(2, "Sabbir", "sabbir@gmail.com");
         sList.add(s1);
         System.out.println(sList);
-        sList.forEach((Student item) -> {
+        sList.forEach(item -> {
             System.out.println(item);
         });
 
