@@ -2,6 +2,7 @@ package feb19Recursion;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Scanner;
 
 /**
  *
@@ -33,6 +34,14 @@ public class ListArrays {
         );
         
         System.out.println(list.toString());
+        Scanner s =new Scanner(System.in);
+        ArrayList<Double> numbers = new ArrayList<>();
+        for(int i = 0; i< 10;i++){
+            System.out.println("Give Numbers");
+            double n= s.nextDouble();
+       numbers.add(n);
+        }
+        System.out.println(numbers.toString());
         
         
         
