@@ -141,6 +141,7 @@ public class Login extends javax.swing.JFrame {
         
         if(userName.equalsIgnoreCase("mahbub")&& password.equals("1234")){
             DashBoard db = new DashBoard();
+            db.setVisible(rootPaneCheckingEnabled);
             db.setVisible(true);
             this.dispose();
         }else{
