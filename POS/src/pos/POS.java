@@ -21,5 +21,5 @@ public class POS {
         UserDao ud = new UserDao();
         ud.saveUser(u);
     }
-    
+
 }

@@ -15,18 +15,18 @@ import java.util.logging.Logger;
  * @author Admin
  */
 public class DbUtil {
+
     private Connection con = null;
     private String url = "jdbc:mysql://localhost:3306/jeestore";
     private String user = "root";
     private String password = "1234";
     private String driver = "com.mysql.cj.jdbc.Driver";
-    
-    public Connection getCon(){
+
+    public Connection getCon() {
         try {
             Class.forName(driver);
             con = DriverManager.getConnection(url, user, password);
-            
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DbUtil.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -34,6 +34,5 @@ public class DbUtil {
         }
         return con;
     }
-    
-    
+
 }
