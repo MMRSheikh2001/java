@@ -20,6 +20,9 @@ public class POS {
         User u = new User("Mahbub", "mahbub1234");
         UserDao ud = new UserDao();
         ud.saveUser(u);
+        
+        
+        
     }
 
 }
