@@ -4,7 +4,9 @@
  */
 package pos;
 
+import pos.dao.CategoryDao;
 import pos.dao.UserDao;
+import pos.model.Category;
 import pos.model.User;
 
 /**
@@ -17,12 +19,14 @@ public class POS {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        User u = new User("Mahbub", "mahbub1234");
-        UserDao ud = new UserDao();
-        ud.saveUser(u);
-        
-        
-        
+        //   User u = new User("Mahbub", "mahbub1234");
+        //    UserDao ud = new UserDao();
+        //   ud.saveUser(u);
+
+        Category c = new Category("Mango");
+        CategoryDao cd = new CategoryDao();
+        cd.save(c);
+
     }
 
 }
