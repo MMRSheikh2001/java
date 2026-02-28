@@ -20,7 +20,7 @@ public class printWriterPractice {
         try {
             PrintWriter pw = new PrintWriter(file);
             for(int i =1;i<101;i++){
-            pw.print(i +" \t");
+            pw.println(i +" \t");
             }
             pw.println();
         } catch (FileNotFoundException ex) {
