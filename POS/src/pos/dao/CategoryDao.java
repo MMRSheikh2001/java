@@ -18,29 +18,24 @@ import pos.util.DbUtil;
  *
  * @author Administrator
  */
-public class CategoryDao implements DaoService<Category>{
-    
-    
+public class CategoryDao implements DaoService<Category> {
+
     DbUtil db = new DbUtil();
-        PreparedStatement ps;
-        ResultSet rs;
-        String sql;
-        
-    
+    PreparedStatement ps;
+    ResultSet rs;
+    String sql;
 
     @Override
     public void save(Category e) {
-        sql ="insert into category(name) values(?)";
-        
+        sql = "insert into category(name) values(?)";
+
         try {
-            ps= db.getCon().prepareStatement(sql);
+            ps = db.getCon().prepareStatement(sql);
             ps.setString(1, e.getName());
             ps.executeUpdate();
             ps.close();
             db.getCon().close();
-            
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -66,5 +61,5 @@ public class CategoryDao implements DaoService<Category>{
     public void delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
 }
