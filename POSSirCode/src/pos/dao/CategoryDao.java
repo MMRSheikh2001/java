@@ -67,7 +67,6 @@ public class CategoryDao implements DaoService<Category> {
         return list;
     }
 
-    @Override
     public void update(int id) {
         sql = "update category set name = ? where id = ?";
         Category c = new Category();
@@ -119,6 +118,11 @@ public class CategoryDao implements DaoService<Category> {
 
     @Override
     public void delete(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update(Category e) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
