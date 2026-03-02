@@ -1,14 +1,22 @@
 package pos.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.List;
 import pos.model.Supplier;
 import pos.service.DaoService;
+import pos.util.DbUtil;
 
 /**
  *
  * @author Administrator
  */
 public class SupplierDao implements DaoService<Supplier> {
+    DbUtil db = new DbUtil();
+    PreparedStatement ps;
+    ResultSet rs;
+    String sql;
+    
     
     @Override
     public void save(Supplier e) {

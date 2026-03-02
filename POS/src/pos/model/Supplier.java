@@ -81,4 +81,10 @@ public class Supplier {
         this.address = address;
     }
 
+    @Override
+    public String toString() {
+        return "Supplier{" + "id=" + id + ", name=" + name + ", cell=" + cell + ", contactPersonName=" + contactPersonName + ", contactPersonCell=" + contactPersonCell + ", address=" + address + '}';
+    }
+
+
 }

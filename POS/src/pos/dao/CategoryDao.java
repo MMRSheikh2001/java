@@ -7,6 +7,7 @@ package pos.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,12 +45,26 @@ public class CategoryDao implements DaoService<Category> {
 
     @Override
     public List<Category> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Category> clist = new ArrayList<>();
+        sql = "select * from category";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Category c = new Category(rs.getInt("id"), rs.getString("name"));
+
+                clist.add(c);
+
+            }
+
+            ps.close();
+            db.getCon().close();
+            rs.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return clist;
     }
-
-    
-
-  
 
     @Override
     public void delete(int id) {
