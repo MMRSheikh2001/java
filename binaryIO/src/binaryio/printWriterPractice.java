@@ -34,7 +34,7 @@ public class printWriterPractice {
        System.out.println(div);
        } catch (Exception e) {
            
-           System.out.println("Invalid");
+           System.out.println(e);
        }
 
 
