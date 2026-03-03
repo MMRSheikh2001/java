@@ -20,8 +20,6 @@ public class Rectangle implements interfaceTest {
         this.length = length;
         this.width = width;
     }
-    
-    
 
     @Override
     public double getArea() {
