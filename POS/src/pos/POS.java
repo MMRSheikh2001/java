@@ -5,8 +5,10 @@
 package pos;
 
 import pos.dao.CategoryDao;
+import pos.dao.SupplierDao;
 import pos.dao.UserDao;
 import pos.model.Category;
+import pos.model.Supplier;
 import pos.model.User;
 
 /**
@@ -23,9 +25,16 @@ public class POS {
         //    UserDao ud = new UserDao();
         //   ud.saveUser(u);
 
-        Category c = new Category("Mango");
-        CategoryDao cd = new CategoryDao();
-        cd.save(c);
+//        Category c = new Category("Mango");
+//        CategoryDao cd = new CategoryDao();
+//        cd.save(c);
+
+        Supplier s = new Supplier("Square", "01644466", 
+                "Mahbub", "0156465778", "Savar");
+        SupplierDao sd= new SupplierDao();
+        sd.save(s);
+        
+        
 
     }
 

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import pos.model.Category;
 import pos.service.DaoService;
 import pos.util.DbUtil;
@@ -36,9 +37,11 @@ public class CategoryDao implements DaoService<Category> {
             ps.executeUpdate();
             ps.close();
             db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Category Saved");
 
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Category Not Saved");
         }
 
     }
