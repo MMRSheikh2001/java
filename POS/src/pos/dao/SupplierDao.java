@@ -53,12 +53,15 @@ public class SupplierDao implements DaoService<Supplier> {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Supplier s = new Supplier(rs.getInt("id"),
-                         rs.getString("name"),
+                        rs.getString("name"),
                         rs.getString("cell"),
                         rs.getString("contactPersonName"),
                         rs.getString("contactPersonCell"),
                         rs.getString("address"));
                 sList.add(s);
+                ps.close();
+                db.getCon().close();
+                rs.close();
             }
         } catch (SQLException ex) {
             Logger.getLogger(SupplierDao.class.getName()).log(Level.SEVERE, null, ex);
