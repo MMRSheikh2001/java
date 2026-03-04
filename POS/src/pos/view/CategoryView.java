@@ -12,7 +12,7 @@ import pos.model.Category;
  * @author Administrator
  */
 public class CategoryView extends javax.swing.JFrame {
-    
+
     CategoryDao categoryDao = new CategoryDao();
     Category c;
 
@@ -147,7 +147,7 @@ public class CategoryView extends javax.swing.JFrame {
         c = new Category(catName);
         categoryDao.save(c);
         clearData();
-        
+
     }//GEN-LAST:event_btnSaveCategoryMouseClicked
 
     /**
