@@ -23,6 +23,10 @@ public class CategoryView extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void clearData() {
+        txtCategoryName.setText("");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -142,6 +146,7 @@ public class CategoryView extends javax.swing.JFrame {
         String catName = txtCategoryName.getText().trim();
         c = new Category(catName);
         categoryDao.save(c);
+        clearData();
         
     }//GEN-LAST:event_btnSaveCategoryMouseClicked
 
