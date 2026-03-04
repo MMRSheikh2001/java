@@ -3,6 +3,7 @@ package pos.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -45,7 +46,25 @@ public class SupplierDao implements DaoService<Supplier> {
 
     @Override
     public List<Supplier> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Supplier> sList = new ArrayList<>();
+        sql = "select * from supplier";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Supplier s = new Supplier(rs.getInt("id"),
+                         rs.getString("name"),
+                        rs.getString("cell"),
+                        rs.getString("contactPersonName"),
+                        rs.getString("contactPersonCell"),
+                        rs.getString("address"));
+                sList.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return sList;
     }
 
     @Override
