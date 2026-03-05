@@ -54,6 +54,9 @@ public class EmployeeDao {
                 eList.add(e);
 
             }
+            ps.close();
+            rs.close();
+            db.getCon().close();
 
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, ex);
