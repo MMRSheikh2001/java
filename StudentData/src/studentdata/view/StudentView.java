@@ -25,6 +25,9 @@ public class StudentView extends javax.swing.JFrame {
     public void clearData(){
     
     }
+    public void showAllStudentData(){
+    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
