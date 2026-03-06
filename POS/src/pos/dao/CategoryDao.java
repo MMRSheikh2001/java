@@ -49,7 +49,7 @@ public class CategoryDao implements DaoService<Category> {
     @Override
     public List<Category> findAll() {
         List<Category> clist = new ArrayList<>();
-        sql = "select * from category";
+        sql = "select * from category order by id";
         try {
             ps = db.getCon().prepareStatement(sql);
             rs = ps.executeQuery();
@@ -76,7 +76,22 @@ public class CategoryDao implements DaoService<Category> {
 
     @Override
     public void update(Category e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        sql = "update category set name=? where id=?";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setString(1, e.getName());
+            ps.setInt(2, e.getId());
+            ps.executeUpdate();
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Category Updated");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+             JOptionPane.showMessageDialog(null, "Category Not Updated");
+        }
+
     }
 
     @Override
