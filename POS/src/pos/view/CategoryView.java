@@ -112,9 +112,19 @@ public class CategoryView extends javax.swing.JFrame {
 
         btnUpdateCategory.setBackground(new java.awt.Color(255, 204, 153));
         btnUpdateCategory.setText("Update");
+        btnUpdateCategory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateCategoryMouseClicked(evt);
+            }
+        });
 
         btnDeleteCategory.setBackground(new java.awt.Color(255, 51, 51));
         btnDeleteCategory.setText("Delete");
+        btnDeleteCategory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteCategoryMouseClicked(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("ID");
@@ -236,19 +246,43 @@ public class CategoryView extends javax.swing.JFrame {
 
     private void tblCategoryViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoryViewMouseClicked
         // TODO add your handling code here:
-        int rowIndex= tblCategoryView.getSelectedRow();
-        String id= tblCategoryView.getModel().getValueAt(rowIndex, 0).toString();
-        String name= tblCategoryView.getModel().getValueAt(rowIndex, 1).toString();
-        
+        int rowIndex = tblCategoryView.getSelectedRow();
+        String id = tblCategoryView.getModel().getValueAt(rowIndex, 0).toString();
+        String name = tblCategoryView.getModel().getValueAt(rowIndex, 1).toString();
+
         txtCategoryId.setText(id);
         txtCategoryName.setText(name);
-        
+
     }//GEN-LAST:event_tblCategoryViewMouseClicked
 
     private void btnResetCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetCategoryMouseClicked
         // TODO add your handling code here:
         clearData();
     }//GEN-LAST:event_btnResetCategoryMouseClicked
+
+    private void btnUpdateCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateCategoryMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtCategoryId.getText().trim());
+        String name = txtCategoryName.getText().trim();
+
+        Category c = new Category(id, name);
+        categoryDao.update(c);
+        showCategory();
+        clearData();
+
+
+    }//GEN-LAST:event_btnUpdateCategoryMouseClicked
+
+    private void btnDeleteCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteCategoryMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtCategoryId.getText().trim());
+
+        categoryDao.delete(id);
+        showCategory();
+        clearData();
+
+
+    }//GEN-LAST:event_btnDeleteCategoryMouseClicked
 
     /**
      * @param args the command line arguments

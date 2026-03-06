@@ -71,7 +71,19 @@ public class CategoryDao implements DaoService<Category> {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sql = "delete from category where id= ?";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            db.getCon().close();
+            ps.close();
+            JOptionPane.showMessageDialog(null, "Category Deleted");
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Category not Deleted");
+        }
+
     }
 
     @Override
@@ -89,7 +101,7 @@ public class CategoryDao implements DaoService<Category> {
 
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
-             JOptionPane.showMessageDialog(null, "Category Not Updated");
+            JOptionPane.showMessageDialog(null, "Category Not Updated");
         }
 
     }
