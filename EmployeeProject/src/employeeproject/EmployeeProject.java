@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 package employeeproject;
 
 import employeeproject.dao.EmployeeDao;
@@ -25,10 +21,10 @@ public class EmployeeProject {
 //        ed.saveStudentData(e);
 
         List<Employee> eList = new ArrayList<>();
-        EmployeeDao ed= new EmployeeDao();
-        eList= ed.findAllStudent();
+        EmployeeDao ed = new EmployeeDao();
+        eList = ed.findAllStudent();
         System.out.println(eList);
-        
+
     }
-    
+
 }
