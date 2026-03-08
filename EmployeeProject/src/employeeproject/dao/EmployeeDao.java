@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,9 +34,11 @@ public class EmployeeDao {
 
             ps.close();
             db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Employee Saved");
 
         } catch (SQLException ex) {
             Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Employee Not Saved");
         }
 
     }
