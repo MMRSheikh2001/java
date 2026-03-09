@@ -42,7 +42,7 @@ public class SupplierDao implements DaoService<Supplier> {
         } catch (SQLException ex) {
             Logger.getLogger(SupplierDao.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Supplier not Added");
-        JOptionPane.showMessageDialog(null, "Supplier Not Added");
+            JOptionPane.showMessageDialog(null, "Supplier Not Added");
         }
 
     }
@@ -62,11 +62,11 @@ public class SupplierDao implements DaoService<Supplier> {
                         rs.getString("contactPersonCell"),
                         rs.getString("address"));
                 sList.add(s);
-                ps.close();
-                db.getCon().close();
-                rs.close();
-                
+
             }
+            ps.close();
+            db.getCon().close();
+            rs.close();
         } catch (SQLException ex) {
             Logger.getLogger(SupplierDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,7 +76,25 @@ public class SupplierDao implements DaoService<Supplier> {
 
     @Override
     public void update(Supplier e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sql = "update supplier set name =?,cell=?,contactPersonName=?,contactPersonCell=?,address=? where id=?";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setString(1, e.getName());
+            ps.setString(2, e.getCell());
+            ps.setString(3, e.getContactPersonName());
+            ps.setString(4, e.getContactPersonCell());
+            ps.setString(5, e.getAddress());
+            ps.setInt(6, e.getId());
+
+            ps.executeUpdate();
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Supplier Updated");
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Supplier Not Updated");
+        }
+
     }
 
     @Override
@@ -86,7 +104,18 @@ public class SupplierDao implements DaoService<Supplier> {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sql = "delete from supplier where id=?";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Supplier Deleted");
+        } catch (SQLException ex) {
+            Logger.getLogger(SupplierDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Supplier Not Deleted");
+        }
     }
 
 }

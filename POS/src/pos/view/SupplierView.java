@@ -4,17 +4,47 @@
  */
 package pos.view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import pos.dao.SupplierDao;
+import pos.model.Supplier;
+
 /**
  *
  * @author Administrator
  */
 public class SupplierView extends javax.swing.JFrame {
 
+    Supplier s;
+    SupplierDao supplierdao = new SupplierDao();
+
     /**
      * Creates new form SupplierView
      */
     public SupplierView() {
         initComponents();
+        showSupplierData();
+    }
+
+    public void showSupplierData() {
+        String[] columns = {"SL", "Name", "Company Cell", "Address", "Contact Person", "Contact Person Cell"};
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(columns);
+        tblSupplierData.setModel(model);
+
+        List<Supplier> sList = supplierdao.findAll();
+        for (Supplier s : sList) {
+            model.addRow(new Object[]{s.getId(), s.getName(), s.getCell(), s.getAddress(), s.getContactPersonName(), s.getContactPersonCell()});
+        }
+    }
+
+    public void clearData() {
+        txtSupplierId.setText("");
+        txtSupplierName.setText("");
+        txtSupplierCompanyCell.setText("");
+        txtSupplierAddress.setText("");
+        txtContactPersonName.setText("");
+        txtContactPersonCell.setText("");
     }
 
     /**
@@ -72,6 +102,8 @@ public class SupplierView extends javax.swing.JFrame {
 
         jLabel2.setText("Id");
 
+        txtSupplierId.setEditable(false);
+
         jLabel3.setText("Name");
 
         jLabel4.setText("Company Cell");
@@ -84,15 +116,35 @@ public class SupplierView extends javax.swing.JFrame {
 
         btnSaveSupplier.setBackground(new java.awt.Color(51, 204, 0));
         btnSaveSupplier.setText("Save");
+        btnSaveSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSaveSupplierMouseClicked(evt);
+            }
+        });
 
         btnSupplierUpdate.setBackground(new java.awt.Color(255, 255, 0));
         btnSupplierUpdate.setText("Update");
+        btnSupplierUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSupplierUpdateMouseClicked(evt);
+            }
+        });
 
         btnDeleteSupplier.setBackground(new java.awt.Color(255, 51, 51));
         btnDeleteSupplier.setText("Delete");
+        btnDeleteSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteSupplierMouseClicked(evt);
+            }
+        });
 
         btnResetSupplier.setBackground(new java.awt.Color(204, 255, 255));
         btnResetSupplier.setText("Reset");
+        btnResetSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnResetSupplierMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -101,18 +153,6 @@ public class SupplierView extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSupplierName, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSupplierCompanyCell, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
@@ -135,8 +175,20 @@ public class SupplierView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnResetSupplier)
-                            .addComponent(txtContactPersonCell, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(35, Short.MAX_VALUE))
+                            .addComponent(txtContactPersonCell, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSupplierId, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSupplierName, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                        .addComponent(txtSupplierCompanyCell, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,6 +231,11 @@ public class SupplierView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblSupplierData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSupplierDataMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblSupplierData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -207,6 +264,68 @@ public class SupplierView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnResetSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnResetSupplierMouseClicked
+        // TODO add your handling code here:
+        clearData();
+    }//GEN-LAST:event_btnResetSupplierMouseClicked
+
+    private void btnSaveSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSaveSupplierMouseClicked
+        // TODO add your handling code here:
+        String name = txtSupplierName.getText().trim();
+        String cell = txtSupplierCompanyCell.getText().trim();
+        String contactPersonName = txtContactPersonName.getText().trim();
+        String contactPersonCell = txtContactPersonCell.getText().trim();
+        String address = txtSupplierAddress.getText().trim();
+
+        s = new Supplier(name, cell, contactPersonName, contactPersonCell, address);
+        supplierdao.save(s);
+        clearData();
+        showSupplierData();
+    }//GEN-LAST:event_btnSaveSupplierMouseClicked
+
+    private void tblSupplierDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSupplierDataMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tblSupplierData.getSelectedRow();
+        String id = tblSupplierData.getModel().getValueAt(rowIndex, 0).toString();
+        String name = tblSupplierData.getModel().getValueAt(rowIndex, 1).toString();
+        String cell = tblSupplierData.getModel().getValueAt(rowIndex, 2).toString();
+        String address = tblSupplierData.getModel().getValueAt(rowIndex, 3).toString();
+        String contactPersonName = tblSupplierData.getModel().getValueAt(rowIndex, 4).toString();
+        String contacctPersonCell = tblSupplierData.getModel().getValueAt(rowIndex, 5).toString();
+
+        txtSupplierId.setText(id);
+        txtSupplierName.setText(name);
+        txtSupplierAddress.setText(address);
+        txtSupplierCompanyCell.setText(cell);
+        txtContactPersonName.setText(contactPersonName);
+        txtContactPersonCell.setText(contacctPersonCell);
+
+    }//GEN-LAST:event_tblSupplierDataMouseClicked
+
+    private void btnSupplierUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSupplierUpdateMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtSupplierId.getText().trim());
+        String name = txtSupplierName.getText().trim();
+        String cell = txtSupplierCompanyCell.getText().trim();
+        String address = txtSupplierAddress.getText().trim();
+        String contactPersonName = txtContactPersonName.getText().trim();
+        String contacctPersonCell = txtContactPersonCell.getText().trim();
+        s = new Supplier(id, name, cell, contactPersonName, contacctPersonCell, address);
+        supplierdao.update(s);
+        clearData();
+        showSupplierData();
+
+    }//GEN-LAST:event_btnSupplierUpdateMouseClicked
+
+    private void btnDeleteSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteSupplierMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtSupplierId.getText().trim());
+        supplierdao.delete(id);
+        clearData();
+        showSupplierData();
+
+    }//GEN-LAST:event_btnDeleteSupplierMouseClicked
 
     /**
      * @param args the command line arguments
