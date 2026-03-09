@@ -28,8 +28,7 @@ public class EmployeeView extends javax.swing.JFrame {
     }
 
     public void showEmployee() {
-        
-        
+
         String[] column = {"SL", "Name", "Salary", "Email"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(column);
@@ -121,6 +120,11 @@ public class EmployeeView extends javax.swing.JFrame {
 
         btnDeleteEmployee.setBackground(new java.awt.Color(255, 51, 51));
         btnDeleteEmployee.setText("Delete");
+        btnDeleteEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnDeleteEmployeeMouseClicked(evt);
+            }
+        });
 
         btnResetEmployee.setBackground(new java.awt.Color(255, 255, 51));
         btnResetEmployee.setText("Reset");
@@ -200,6 +204,11 @@ public class EmployeeView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmployeeMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEmployee);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,6 +252,32 @@ public class EmployeeView extends javax.swing.JFrame {
         // TODO add your handling code here:
         clearData();
     }//GEN-LAST:event_btnResetEmployeeMouseClicked
+
+    private void btnDeleteEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteEmployeeMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtEmployeeId.getText().trim());
+        ed.delete(id);
+        showEmployee();
+        clearData();
+
+
+    }//GEN-LAST:event_btnDeleteEmployeeMouseClicked
+
+    private void tblEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmployeeMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tblEmployee.getSelectedRow();
+        String id = tblEmployee.getModel().getValueAt(rowIndex, 0).toString();
+        String name = tblEmployee.getModel().getValueAt(rowIndex, 1).toString();
+        String salary = tblEmployee.getModel().getValueAt(rowIndex, 2).toString();
+        String email = tblEmployee.getModel().getValueAt(rowIndex, 3).toString();
+
+        txtEmployeeId.setText(id);
+        txtEmployeeName.setText(name);
+        txtEmployeeSalary.setText(salary);
+        txtEmployeeEmail.setText(email);
+
+
+    }//GEN-LAST:event_tblEmployeeMouseClicked
 
     /**
      * @param args the command line arguments

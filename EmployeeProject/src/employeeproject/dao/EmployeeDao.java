@@ -68,4 +68,20 @@ public class EmployeeDao {
 
     }
 
+    public void delete(int id) {
+        sql = "delete from employee where id= ?";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Employee Deleted");
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Employee Not Deleted");
+        }
+
+    }
+
 }
