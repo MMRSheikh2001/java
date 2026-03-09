@@ -84,4 +84,25 @@ public class EmployeeDao {
 
     }
 
+    public void updateEmployee(Employee e) {
+        sql = "update employee set name=?,salary =? , email=? where id=?";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setString(1, e.getName());
+            ps.setDouble(2, e.getSalary());
+            ps.setString(3, e.getEmail());
+            ps.setInt(4, e.getId());
+            ps.executeUpdate();
+
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Employee Updated");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(EmployeeDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Employee Not Updated");
+        }
+
+    }
+
 }

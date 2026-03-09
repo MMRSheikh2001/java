@@ -117,6 +117,11 @@ public class EmployeeView extends javax.swing.JFrame {
 
         btnUpdateEmployee.setBackground(new java.awt.Color(0, 255, 204));
         btnUpdateEmployee.setText("Update");
+        btnUpdateEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateEmployeeMouseClicked(evt);
+            }
+        });
 
         btnDeleteEmployee.setBackground(new java.awt.Color(255, 51, 51));
         btnDeleteEmployee.setText("Delete");
@@ -244,6 +249,7 @@ public class EmployeeView extends javax.swing.JFrame {
         em = new Employee(name, salary, email);
         ed.saveStudentData(em);
         clearData();
+        showEmployee();
 
 
     }//GEN-LAST:event_btnSaveEmployeeMouseClicked
@@ -278,6 +284,19 @@ public class EmployeeView extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_tblEmployeeMouseClicked
+
+    private void btnUpdateEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateEmployeeMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtEmployeeId.getText().trim());
+        String name = txtEmployeeName.getText().trim();
+        double salary = Double.parseDouble(txtEmployeeSalary.getText().trim());
+        String email = txtEmployeeEmail.getText().trim();
+        em = new Employee(id, name, salary, email);
+        ed.updateEmployee(em);
+        clearData();
+        showEmployee();
+
+    }//GEN-LAST:event_btnUpdateEmployeeMouseClicked
 
     /**
      * @param args the command line arguments
