@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import pos.model.Supplier;
 import pos.service.DaoService;
 import pos.util.DbUtil;
@@ -36,10 +37,12 @@ public class SupplierDao implements DaoService<Supplier> {
             ps.close();
             db.getCon().close();
             System.out.println("Supplier Added");
+            JOptionPane.showMessageDialog(null, "Supplier Added");
 
         } catch (SQLException ex) {
             Logger.getLogger(SupplierDao.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Supplier not Added");
+        JOptionPane.showMessageDialog(null, "Supplier Not Added");
         }
 
     }
@@ -62,6 +65,7 @@ public class SupplierDao implements DaoService<Supplier> {
                 ps.close();
                 db.getCon().close();
                 rs.close();
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(SupplierDao.class.getName()).log(Level.SEVERE, null, ex);
