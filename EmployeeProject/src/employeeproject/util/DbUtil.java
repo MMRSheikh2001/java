@@ -15,7 +15,8 @@ import java.util.logging.Logger;
  * @author Admin
  */
 public class DbUtil {
-     private Connection con = null;
+
+    private Connection con = null;
     private String url = "jdbc:mysql://localhost:3306/jeestore";
     private String user = "root";
     private String password = "1234";
