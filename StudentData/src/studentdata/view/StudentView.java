@@ -4,6 +4,8 @@
  */
 package studentdata.view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import studentdata.dao.StudentDao;
 import studentdata.model.Student;
 
@@ -12,7 +14,7 @@ import studentdata.model.Student;
  * @author Admin
  */
 public class StudentView extends javax.swing.JFrame {
-    
+
     Student s;
     StudentDao sd = new StudentDao();
 
@@ -21,12 +23,26 @@ public class StudentView extends javax.swing.JFrame {
      */
     public StudentView() {
         initComponents();
+        showAllStudentData();
     }
-    public void clearData(){
-    
+
+    public void clearData() {
+        txtStudentId.setText("");
+        txtStudentName.setText("");
+        txtStudentCell.setText("");
+        txtStudentBloodGroup.setText("");
+        txtCourse.setText("");
     }
-    public void showAllStudentData(){
-    
+
+    public void showAllStudentData() {
+        String[] columns = {"SL", "Name", "Course", "Cell No", "Blood Group"};
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(columns);
+        tblShowStudent.setModel(model);
+        List<Student> sList = sd.findAllStudents();
+        for (Student s : sList) {
+            model.addRow(new Object[]{s.getId(), s.getName(), s.getCourse(), s.getCell(), s.getBloodGroup()});
+        }
     }
 
     /**
@@ -52,10 +68,12 @@ public class StudentView extends javax.swing.JFrame {
         txtStudentCell = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtStudentBloodGroup = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnStudentDelete = new javax.swing.JButton();
+        btnStudentSave = new javax.swing.JButton();
+        btnStudentUpdate = new javax.swing.JButton();
+        btnStudentReset = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblShowStudent = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,27 +108,27 @@ public class StudentView extends javax.swing.JFrame {
 
         jLabel7.setText("Blood Group");
 
-        jButton1.setBackground(new java.awt.Color(255, 51, 51));
-        jButton1.setText("Delete");
+        btnStudentDelete.setBackground(new java.awt.Color(255, 51, 51));
+        btnStudentDelete.setText("Delete");
 
-        jButton2.setBackground(new java.awt.Color(51, 153, 0));
-        jButton2.setText("Save");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnStudentSave.setBackground(new java.awt.Color(51, 153, 0));
+        btnStudentSave.setText("Save");
+        btnStudentSave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
+                btnStudentSaveMouseClicked(evt);
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(51, 0, 153));
-        jButton3.setText("Update");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnStudentUpdate.setBackground(new java.awt.Color(51, 0, 153));
+        btnStudentUpdate.setText("Update");
+        btnStudentUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnStudentUpdateActionPerformed(evt);
             }
         });
 
-        jButton4.setBackground(new java.awt.Color(153, 153, 153));
-        jButton4.setText("Reset");
+        btnStudentReset.setBackground(new java.awt.Color(153, 153, 153));
+        btnStudentReset.setText("Reset");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -152,16 +170,16 @@ public class StudentView extends javax.swing.JFrame {
                 .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton3)
+                .addComponent(btnStudentUpdate)
                 .addGap(53, 53, 53)
-                .addComponent(jButton1)
+                .addComponent(btnStudentDelete)
                 .addGap(72, 72, 72)
-                .addComponent(jButton4)
+                .addComponent(btnStudentReset)
                 .addGap(91, 91, 91))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(23, 23, 23)
-                    .addComponent(jButton2)
+                    .addComponent(btnStudentSave)
                     .addContainerGap(502, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
@@ -186,16 +204,29 @@ public class StudentView extends javax.swing.JFrame {
                     .addComponent(txtStudentBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
+                    .addComponent(btnStudentDelete)
+                    .addComponent(btnStudentReset)
+                    .addComponent(btnStudentUpdate))
                 .addGap(26, 26, 26))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                     .addContainerGap(185, Short.MAX_VALUE)
-                    .addComponent(jButton2)
+                    .addComponent(btnStudentSave)
                     .addGap(24, 24, 24)))
         );
+
+        tblShowStudent.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblShowStudent);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -203,6 +234,7 @@ public class StudentView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -210,28 +242,32 @@ public class StudentView extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 571, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 211, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnStudentUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStudentUpdateActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnStudentUpdateActionPerformed
 
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+    private void btnStudentSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnStudentSaveMouseClicked
         // TODO add your handling code here:
         String name = txtStudentName.getText().trim();
         String cell = txtStudentCell.getText().trim();
         String course = txtCourse.getText().trim();
         String bloodGroup = txtStudentBloodGroup.getText().trim();
         s = new Student(name, course, cell, bloodGroup);
-        
+
         sd.save(s);
-        
-    }//GEN-LAST:event_jButton2MouseClicked
+        clearData();
+        showAllStudentData();
+
+    }//GEN-LAST:event_btnStudentSaveMouseClicked
 
     /**
      * @param args the command line arguments
@@ -269,10 +305,10 @@ public class StudentView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnStudentDelete;
+    private javax.swing.JButton btnStudentReset;
+    private javax.swing.JButton btnStudentSave;
+    private javax.swing.JButton btnStudentUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -282,6 +318,8 @@ public class StudentView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblShowStudent;
     private javax.swing.JTextField txtCourse;
     private javax.swing.JTextField txtStudentBloodGroup;
     private javax.swing.JTextField txtStudentCell;
