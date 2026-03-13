@@ -4,10 +4,118 @@
  */
 package pos.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import pos.model.Product;
+import pos.service.DaoService;
+import pos.util.DbUtil;
+
 /**
  *
  * @author Administrator
  */
-public class ProductDao {
-    
+public class ProductDao implements DaoService<Product> {
+
+    DbUtil db = new DbUtil();
+    PreparedStatement ps;
+    ResultSet rs;
+    String sql;
+
+    @Override
+    public void save(Product e) {
+        sql = "insert into product (name,price,quantity,supplierId,categoryName) values(?,?,?,?,?)";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setString(1, e.getName());
+            ps.setDouble(2, e.getPrice());
+            ps.setDouble(3, e.getQuantity());
+            ps.setInt(4, e.getSupplierId());
+            ps.setString(5, e.getCategoryName());
+            ps.executeUpdate();
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Product Saved");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Product Not Saved");
+        }
+
+    }
+
+    @Override
+    public List<Product> findAll() {
+        List<Product> pList = new ArrayList<>();
+        sql = "select * from product";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("price"),
+                        rs.getDouble("quantity"),
+                        rs.getInt("supplierId"),
+                        rs.getString("categoryName"));
+                pList.add(p);
+            }
+            rs.close();
+            ps.close();
+            db.getCon().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return pList;
+    }
+
+    @Override
+    public void update(Product e) {
+        sql = "update product set name =?,price =?,quantity =?,supplierId=?,categoryName=? where id=?";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setString(1, e.getName());
+            ps.setDouble(2, e.getPrice());
+            ps.setDouble(3, e.getQuantity());
+            ps.setInt(4, e.getSupplierId());
+            ps.setString(5, e.getCategoryName());
+            ps.setInt(6, e.getId());
+            ps.executeUpdate();
+
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Product Updated");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Product Not Updated");
+        }
+
+    }
+
+    @Override
+    public Product findById(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void delete(int id) {
+        sql = "delete from product where id=?";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Product Deleted");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Product Not Deleted");
+        }
+    }
+
 }
