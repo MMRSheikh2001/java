@@ -4,6 +4,9 @@
  */
 package multithreadprac;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -13,9 +16,18 @@ import java.util.LinkedList;
 public class PraclinkedList {
 
     public static void main(String[] args) {
-        LinkedList<String> c= new LinkedList<String>();
+        LinkedList<String> c = new LinkedList<String>();
         c.add("Red");
         c.add("Blue");
         System.out.println(c.get(1));
+        Collections.sort(c);
+        System.out.println(c.get(0));
+        c.add("Green");
+        Iterator<String> it = c.iterator();
+        //it.next();
+        // System.out.println(it.next());
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        }
     }
 }
