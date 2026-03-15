@@ -111,4 +111,23 @@ public class CategoryDao implements DaoService<Category> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    public List<String> getAllCategoryName() {
+        List<String> cList = new ArrayList<>();
+        sql = "select name from category";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String s = rs.getString("name");
+                cList.add(s);
+            }
+            rs.close();
+            ps.close();
+            db.getCon().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cList;
+    }
+
 }
