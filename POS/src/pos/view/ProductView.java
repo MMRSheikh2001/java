@@ -4,6 +4,8 @@
  */
 package pos.view;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import pos.dao.CategoryDao;
@@ -16,7 +18,7 @@ import pos.model.Product;
  * @author Administrator
  */
 public class ProductView extends javax.swing.JFrame {
-    
+
     ProductDao productDao = new ProductDao();
     Product p;
     CategoryDao cd = new CategoryDao();
@@ -30,8 +32,21 @@ public class ProductView extends javax.swing.JFrame {
         loadCategory();
         loadSupplier();
         showProductTable();
+
+        cmbCategoryName.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                getCategoryName();
+            }
+        });
+        cmbSupplierName.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                getSupplierIdByName();
+            }
+        });
     }
-    
+
     public void loadCategory() {
         List<String> productList = cd.getAllCategoryName();
         cmbCategoryName.removeAllItems();
@@ -49,16 +64,35 @@ public class ProductView extends javax.swing.JFrame {
             cmbSupplierName.addItem(supplier);
         }
     }
-    
+
+    public int getSupplierIdByName() {
+        String supName = cmbSupplierName.getSelectedItem().toString();
+        int id = sd.getIdByName(supName);
+        return id;
+    }
+
+    public String getCategoryName() {
+        return cmbCategoryName.getSelectedItem().toString();
+    }
+
     public void showProductTable() {
-        String[] columns = {"SL", "Name", "Price", "Quantity", "Supplier Id", "Category Name"};
+        String[] columns = {"SL", "Name", "Price", "Quantity", "Supplier Name", "Category Name"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
         tblProductView.setModel(model);
+        List<Product> pList = productDao.findAll();
+        for (Product p : pList) {
+            model.addRow(new Object[]{p.getId(), p.getName(), p.getPrice(), p.getQuantity(), p.getSupplierName(), p.getCategoryName()});
+        }
     }
-    
+
     public void clearData() {
-        
+        txtProductId.setText("");
+        txtProductName.setText("");
+        txtProductPrice.setText("");
+        txtProductQuantity.setText("");
+        loadCategory();
+        loadSupplier();
     }
 
     /**
@@ -262,6 +296,11 @@ public class ProductView extends javax.swing.JFrame {
         String name = txtProductName.getText().trim();
         double price = Double.parseDouble(txtProductPrice.getText().trim());
         double quantity = Double.parseDouble(txtProductQuantity.getText().trim());
+        int supplierId = getSupplierIdByName();
+        String categoryName = getCategoryName();
+        p = new Product(name, price, quantity, supplierId, categoryName);
+        productDao.save(p);
+        showProductTable();
     }//GEN-LAST:event_btnSaveProductMouseClicked
 
     /**
