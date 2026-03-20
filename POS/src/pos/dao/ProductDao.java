@@ -29,17 +29,72 @@ public class ProductDao implements DaoService<Product> {
 
     @Override
     public void save(Product e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sql = "insert into product (name,price,quantity,categoryId,supplierId) values(?,?,?,?,?)";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setString(1, e.getName());
+            ps.setDouble(2, e.getPrice());
+            ps.setDouble(3, e.getQuantity());
+            ps.setInt(4, e.getCategoryId());
+            ps.setInt(5, e.getSupplierId());
+            ps.executeUpdate();
+
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Product Saved");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Product Not Saved");
+        }
+
     }
 
     @Override
     public List<Product> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Product> pList = new ArrayList<>();
+        sql = "select * from product";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Product p = new Product(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("price"),
+                        rs.getDouble("quantity"),
+                        rs.getInt("categoryId"), rs.getInt("supplierId"));
+                pList.add(p);
+            }
+            rs.close();
+            ps.close();
+            db.getCon().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return pList;
     }
 
     @Override
     public void update(Product e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        sql = "update product set name=?,price=?,quantity=?,categoryId=?,supplierId=? where id=? ";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setString(1, e.getName());
+            ps.setDouble(2, e.getPrice());
+            ps.setDouble(3, e.getQuantity());
+            ps.setInt(4, e.getCategoryId());
+            ps.setInt(5, e.getSupplierId());
+            ps.setInt(6, e.getId());
+            ps.executeUpdate();
+
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Product Updated");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Product Not Updated");
+        }
     }
 
     @Override
@@ -49,7 +104,20 @@ public class ProductDao implements DaoService<Product> {
 
     @Override
     public void delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sql = "delete from product where id =?";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            ps.close();
+            db.getCon().close();
+
+            JOptionPane.showMessageDialog(null, "Product Deleted");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Product Not Deleted");
+        }
+
     }
 
 }
