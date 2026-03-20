@@ -29,6 +29,7 @@ public class ProductView extends javax.swing.JFrame {
      */
     public ProductView() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         loadCategory();
         loadSupplier();
         showProductTable();
@@ -52,7 +53,7 @@ public class ProductView extends javax.swing.JFrame {
         cmbCategoryName.removeAllItems();
         cmbCategoryName.addItem("--Add Product--");
         for (String product : productList) {
-            cmbCategoryName.addItem(product);
+            cmbCategoryName.addItem(product.trim());
         }
     }
 
@@ -61,7 +62,7 @@ public class ProductView extends javax.swing.JFrame {
         cmbSupplierName.removeAllItems();
         cmbSupplierName.addItem("--Select Supplier--");
         for (String supplier : supplierList) {
-            cmbSupplierName.addItem(supplier);
+            cmbSupplierName.addItem(supplier.trim());
         }
     }
 
@@ -82,7 +83,7 @@ public class ProductView extends javax.swing.JFrame {
         tblProductView.setModel(model);
         List<Product> pList = productDao.findAll();
         for (Product p : pList) {
-            model.addRow(new Object[]{p.getId(), p.getName(), p.getPrice(), p.getQuantity(), p.getSupplierName(), p.getCategoryName()});
+            model.addRow(new Object[]{p.getId(), p.getName(), p.getPrice(), p.getQuantity(), p.getCategoryName(), p.getSupplierName()});
         }
     }
 
@@ -175,12 +176,27 @@ public class ProductView extends javax.swing.JFrame {
 
         btnUpdateProduct.setBackground(new java.awt.Color(0, 255, 255));
         btnUpdateProduct.setText("Update");
+        btnUpdateProduct.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnUpdateProductMouseClicked(evt);
+            }
+        });
 
         btnProductDelete.setBackground(new java.awt.Color(255, 51, 51));
         btnProductDelete.setText("Delete");
+        btnProductDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductDeleteMouseClicked(evt);
+            }
+        });
 
         btnProductReset.setBackground(new java.awt.Color(255, 102, 255));
         btnProductReset.setText("Reset");
+        btnProductReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductResetMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -263,6 +279,11 @@ public class ProductView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblProductView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductViewMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProductView);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -302,6 +323,52 @@ public class ProductView extends javax.swing.JFrame {
         productDao.save(p);
         showProductTable();
     }//GEN-LAST:event_btnSaveProductMouseClicked
+
+    private void btnProductResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductResetMouseClicked
+        // TODO add your handling code here:
+        clearData();
+    }//GEN-LAST:event_btnProductResetMouseClicked
+
+    private void tblProductViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductViewMouseClicked
+        // TODO add your handling code here:
+        int rowIndex = tblProductView.getSelectedRow();
+        String id = tblProductView.getModel().getValueAt(rowIndex, 0).toString();
+        String name = tblProductView.getModel().getValueAt(rowIndex, 1).toString();
+        String price = tblProductView.getModel().getValueAt(rowIndex, 2).toString();
+        String quantity = tblProductView.getModel().getValueAt(rowIndex, 3).toString();
+        String supplierName = tblProductView.getModel().getValueAt(rowIndex, 4).toString();
+        String categoryName = tblProductView.getModel().getValueAt(rowIndex, 5).toString();
+
+        Product p = productDao.findById(Integer.parseInt(id));
+
+        txtProductId.setText(id);
+        txtProductName.setText(name);
+        txtProductPrice.setText(price);
+        txtProductQuantity.setText(quantity);
+        cmbSupplierName.setSelectedItem(supplierName.trim());
+        cmbCategoryName.setSelectedItem(categoryName.trim());
+
+    }//GEN-LAST:event_tblProductViewMouseClicked
+
+    private void btnUpdateProductMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateProductMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtProductId.getText().trim());
+        String name = txtProductName.getText().trim();
+        double price = Double.parseDouble(txtProductPrice.getText().trim());
+        double quantity = Double.parseDouble(txtProductQuantity.getText().trim());
+        int supplierId = getSupplierIdByName();
+        String categoryName = getCategoryName();
+        p = new Product(id, name, price, quantity, supplierId, categoryName);
+        productDao.update(p);
+        showProductTable();
+
+
+    }//GEN-LAST:event_btnUpdateProductMouseClicked
+
+    private void btnProductDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductDeleteMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_btnProductDeleteMouseClicked
 
     /**
      * @param args the command line arguments

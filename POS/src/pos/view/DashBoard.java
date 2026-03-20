@@ -15,6 +15,7 @@ public class DashBoard extends javax.swing.JFrame {
      */
     public DashBoard() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 
     /**
@@ -26,21 +27,119 @@ public class DashBoard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        btnProductDashboard = new javax.swing.JButton();
+        btnSupplierDashboard = new javax.swing.JButton();
+        btnCategoryDashboard = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(102, 255, 255));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("JEE STORE");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+        );
+
+        btnProductDashboard.setBackground(new java.awt.Color(102, 204, 0));
+        btnProductDashboard.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnProductDashboard.setText("Product");
+        btnProductDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductDashboardMouseClicked(evt);
+            }
+        });
+
+        btnSupplierDashboard.setBackground(new java.awt.Color(255, 255, 102));
+        btnSupplierDashboard.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSupplierDashboard.setText("Supplier");
+        btnSupplierDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSupplierDashboardMouseClicked(evt);
+            }
+        });
+
+        btnCategoryDashboard.setBackground(new java.awt.Color(51, 51, 255));
+        btnCategoryDashboard.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        btnCategoryDashboard.setText("Category");
+        btnCategoryDashboard.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCategoryDashboardMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(529, Short.MAX_VALUE)
+                .addComponent(btnProductDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(btnSupplierDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(583, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(254, 254, 254)
+                    .addComponent(btnCategoryDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(345, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(92, 92, 92)
+                .addComponent(btnProductDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 139, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(212, Short.MAX_VALUE)
+                    .addComponent(btnSupplierDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(141, 141, 141)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(218, Short.MAX_VALUE)
+                    .addComponent(btnCategoryDashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(135, 135, 135)))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSupplierDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSupplierDashboardMouseClicked
+        // TODO add your handling code here:
+        SupplierView sv = new SupplierView();
+        sv.setVisible(true);
+        
+    }//GEN-LAST:event_btnSupplierDashboardMouseClicked
+
+    private void btnCategoryDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoryDashboardMouseClicked
+        // TODO add your handling code here:
+        CategoryView cv = new CategoryView();
+        cv.setVisible(true);
+    }//GEN-LAST:event_btnCategoryDashboardMouseClicked
+
+    private void btnProductDashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductDashboardMouseClicked
+        // TODO add your handling code here:
+        ProductView pv = new ProductView();
+        pv.setVisible(true);
+    }//GEN-LAST:event_btnProductDashboardMouseClicked
 
     /**
      * @param args the command line arguments
@@ -78,5 +177,10 @@ public class DashBoard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCategoryDashboard;
+    private javax.swing.JButton btnProductDashboard;
+    private javax.swing.JButton btnSupplierDashboard;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

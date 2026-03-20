@@ -14,7 +14,7 @@ import pos.model.Category;
  * @author Administrator
  */
 public class CategoryView extends javax.swing.JFrame {
-
+    
     CategoryDao categoryDao = new CategoryDao();
     Category c;
 
@@ -23,24 +23,25 @@ public class CategoryView extends javax.swing.JFrame {
      */
     public CategoryView() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         showCategory();
     }
-
+    
     public void showCategory() {
         String[] columns = {"SL", "Category Name"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
-
+        
         tblCategoryView.setModel(model);
-
+        
         List<Category> cList = categoryDao.findAll();
-
+        
         for (Category c : cList) {
             model.addRow(new Object[]{c.getId(), c.getName()});
         }
-
+        
     }
-
+    
     public void clearData() {
         txtCategoryName.setText("");
         txtCategoryId.setText("");
@@ -249,7 +250,7 @@ public class CategoryView extends javax.swing.JFrame {
         int rowIndex = tblCategoryView.getSelectedRow();
         String id = tblCategoryView.getModel().getValueAt(rowIndex, 0).toString();
         String name = tblCategoryView.getModel().getValueAt(rowIndex, 1).toString();
-
+        
         txtCategoryId.setText(id);
         txtCategoryName.setText(name);
 
@@ -264,23 +265,23 @@ public class CategoryView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int id = Integer.parseInt(txtCategoryId.getText().trim());
         String name = txtCategoryName.getText().trim();
-
+        
         Category c = new Category(id, name);
         categoryDao.update(c);
         showCategory();
         clearData();
-
+        
 
     }//GEN-LAST:event_btnUpdateCategoryMouseClicked
 
     private void btnDeleteCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeleteCategoryMouseClicked
         // TODO add your handling code here:
         int id = Integer.parseInt(txtCategoryId.getText().trim());
-
+        
         categoryDao.delete(id);
         showCategory();
         clearData();
-
+        
 
     }//GEN-LAST:event_btnDeleteCategoryMouseClicked
 
