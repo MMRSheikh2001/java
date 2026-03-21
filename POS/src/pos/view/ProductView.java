@@ -79,7 +79,7 @@ public class ProductView extends javax.swing.JFrame {
     }
 
     public void showProductTable() {
-        String[] columns = {"SL", "Name", "Price", "Quantity", "Supplier Name", "Category Name"};
+        String[] columns = {"SL", "Name", "Price", "Quantity", "Category Name", "Supplier Name"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columns);
         tblProductView.setModel(model);
