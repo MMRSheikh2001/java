@@ -37,7 +37,7 @@ public class ProductView extends javax.swing.JFrame {
         cmbCategoryName.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
-                getCategoryName();
+                getCategoryIdByName();
             }
         });
         cmbSupplierName.addItemListener(new ItemListener() {
@@ -72,8 +72,10 @@ public class ProductView extends javax.swing.JFrame {
         return id;
     }
 
-    public String getCategoryName() {
-        return cmbCategoryName.getSelectedItem().toString();
+    public int getCategoryIdByName() {
+        String catName = cmbCategoryName.getSelectedItem().toString();
+        int id = cd.getIdByName(catName);
+        return id;
     }
 
     public void showProductTable() {
@@ -318,8 +320,8 @@ public class ProductView extends javax.swing.JFrame {
         double price = Double.parseDouble(txtProductPrice.getText().trim());
         double quantity = Double.parseDouble(txtProductQuantity.getText().trim());
         int supplierId = getSupplierIdByName();
-        String categoryName = getCategoryName();
-        p = new Product(name, price, quantity, supplierId, categoryName);
+        int categoryId = getCategoryIdByName();
+        p = new Product(name, price, quantity, categoryId, supplierId);
         productDao.save(p);
         showProductTable();
     }//GEN-LAST:event_btnSaveProductMouseClicked
@@ -357,8 +359,8 @@ public class ProductView extends javax.swing.JFrame {
         double price = Double.parseDouble(txtProductPrice.getText().trim());
         double quantity = Double.parseDouble(txtProductQuantity.getText().trim());
         int supplierId = getSupplierIdByName();
-        String categoryName = getCategoryName();
-        p = new Product(id, name, price, quantity, supplierId, categoryName);
+        int categoryId = getCategoryIdByName();
+        p = new Product(id, name, price, quantity, categoryId, supplierId);
         productDao.update(p);
         showProductTable();
 
