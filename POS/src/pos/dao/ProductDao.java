@@ -52,16 +52,16 @@ public class ProductDao implements DaoService<Product> {
     @Override
     public List<Product> findAll() {
         List<Product> pList = new ArrayList<>();
-        sql = "select * from product";
+        sql = "select p.id, p.name,p.price,p.quantity,c.name,s.name from product p join category c on p.categoryId=c.id join supplier s on p.supplierId=s.id ";
         try {
             ps = db.getCon().prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                Product p = new Product(rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getDouble("price"),
-                        rs.getDouble("quantity"),
-                        rs.getInt("categoryId"), rs.getInt("supplierId"));
+                Product p = new Product(rs.getInt("p.id"),
+                        rs.getString("p.name"),
+                        rs.getDouble("p.price"),
+                        rs.getDouble("p.quantity"),
+                        rs.getString("c.name"), rs.getString("s.name"));
                 pList.add(p);
             }
             rs.close();
