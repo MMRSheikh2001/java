@@ -14,7 +14,17 @@ public class Lesson5Loops {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        // TODO code application logic here while loops
+        int i =0;
+        while(i<1000){
+    double ran= Math.random()*10;
+            System.out.println(ran);
+            i++;
+    }
+        
+        
+        
+        
         
     }
     
