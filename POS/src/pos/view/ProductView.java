@@ -18,7 +18,7 @@ import pos.model.Product;
  * @author Administrator
  */
 public class ProductView extends javax.swing.JFrame {
-
+    
     ProductDao productDao = new ProductDao();
     Product p;
     CategoryDao cd = new CategoryDao();
@@ -33,7 +33,7 @@ public class ProductView extends javax.swing.JFrame {
         loadCategory();
         loadSupplier();
         showProductTable();
-
+        
         cmbCategoryName.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -47,7 +47,7 @@ public class ProductView extends javax.swing.JFrame {
             }
         });
     }
-
+    
     public void loadCategory() {
         List<String> productList = cd.getAllCategoryName();
         cmbCategoryName.removeAllItems();
@@ -56,7 +56,7 @@ public class ProductView extends javax.swing.JFrame {
             cmbCategoryName.addItem(product.trim());
         }
     }
-
+    
     public void loadSupplier() {
         List<String> supplierList = sd.findSupplierName();
         cmbSupplierName.removeAllItems();
@@ -65,19 +65,19 @@ public class ProductView extends javax.swing.JFrame {
             cmbSupplierName.addItem(supplier.trim());
         }
     }
-
+    
     public int getSupplierIdByName() {
         String supName = cmbSupplierName.getSelectedItem().toString();
         int id = sd.getIdByName(supName);
         return id;
     }
-
+    
     public int getCategoryIdByName() {
         String catName = cmbCategoryName.getSelectedItem().toString();
         int id = cd.getIdByName(catName);
         return id;
     }
-
+    
     public void showProductTable() {
         String[] columns = {"SL", "Name", "Price", "Quantity", "Category Name", "Supplier Name"};
         DefaultTableModel model = new DefaultTableModel();
@@ -88,14 +88,14 @@ public class ProductView extends javax.swing.JFrame {
             model.addRow(new Object[]{p.getId(), p.getName(), p.getPrice(), p.getQuantity(), p.getCategoryName(), p.getSupplierName()});
         }
     }
-
+    
     public void clearData() {
         txtProductId.setText("");
         txtProductName.setText("");
         txtProductPrice.setText("");
         txtProductQuantity.setText("");
-        loadCategory();
-        loadSupplier();
+        cmbCategoryName.setSelectedIndex(0);
+        cmbSupplierName.setSelectedIndex(0);
     }
 
     /**
@@ -348,10 +348,10 @@ public class ProductView extends javax.swing.JFrame {
         String name = tblProductView.getModel().getValueAt(rowIndex, 1).toString();
         String price = tblProductView.getModel().getValueAt(rowIndex, 2).toString();
         String quantity = tblProductView.getModel().getValueAt(rowIndex, 3).toString();
-
+        
         String categoryName = tblProductView.getModel().getValueAt(rowIndex, 4).toString();
         String supplierName = tblProductView.getModel().getValueAt(rowIndex, 5).toString();
-
+        
         txtProductId.setText(id);
         txtProductName.setText(name);
         txtProductPrice.setText(price);
@@ -371,10 +371,9 @@ public class ProductView extends javax.swing.JFrame {
         int categoryId = getCategoryIdByName();
         p = new Product(id, name, price, quantity, categoryId, supplierId);
         productDao.update(p);
-
-        showProductTable();
         clearData();
-
+        showProductTable();
+        
 
     }//GEN-LAST:event_btnUpdateProductMouseClicked
 
@@ -382,9 +381,9 @@ public class ProductView extends javax.swing.JFrame {
         // TODO add your handling code here:
         int id = Integer.parseInt(txtProductId.getText().trim());
         productDao.delete(id);
-
-        showProductTable();
         clearData();
+        showProductTable();
+        
 
     }//GEN-LAST:event_btnProductDeleteMouseClicked
 
