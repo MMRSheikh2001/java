@@ -2,29 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package lesson6array;
-
-import java.util.Arrays;
+package lesson7methods;
 
 /**
  *
  * @author Administrator
  */
-public class Lesson6Array {
+public class Lesson7Methods {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //Declaration and memory allocation
-        int[] marks = new int[5];
         
-        //Declaration , memory allocation and intialization
-        int[] num = {12, 23, 34, 56};
         
-        System.out.println(Arrays.toString(num));
-        System.out.println(Arrays.toString(marks));
     }
     
 }
