@@ -4,17 +4,38 @@
  */
 package pos.view;
 
+import java.util.List;
+import pos.dao.ProductDao;
+import pos.dao.SalesDao;
+import pos.util.SalesUtil;
+
 /**
  *
  * @author Administrator
  */
 public class SalesView extends javax.swing.JFrame {
+    
+    ProductDao pd = new ProductDao();
+    SalesDao salesdao = new SalesDao();
+    SalesUtil salesutil = new SalesUtil();
 
     /**
      * Creates new form SalesView
      */
     public SalesView() {
         initComponents();
+        loadAllProduct();
+    }
+    
+    public void loadAllProduct() {
+        List<String> pList = pd.getAllProductName();
+        comboSalesProduct.removeAllItems();
+        comboSalesProduct.addItem("--Select Product");
+        for (String p : pList) {
+            
+            comboSalesProduct.addItem(p);
+        }
+        
     }
 
     /**
@@ -26,21 +47,189 @@ public class SalesView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtSalesId = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        comboSalesProduct = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtSalesUnitPrice = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtSalesQuantity = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        txtSalesTotalPrice = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtSalesDiscountRate = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtSalesDiscountAmount = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtSalesActualPrice = new javax.swing.JTextField();
+        btnSell = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(204, 0, 204));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Sales");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+        );
+
+        jLabel2.setText("Sales Id");
+
+        txtSalesId.setEditable(false);
+
+        jLabel3.setText("Product");
+
+        comboSalesProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setText("Unit Price");
+
+        jLabel5.setText("Quantity");
+
+        txtSalesQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSalesQuantityFocusLost(evt);
+            }
+        });
+
+        jLabel6.setText("Total Price");
+
+        txtSalesTotalPrice.setEditable(false);
+
+        jLabel7.setText("Discount Rate");
+
+        txtSalesDiscountRate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSalesDiscountRateFocusLost(evt);
+            }
+        });
+
+        jLabel8.setText("Discount");
+
+        txtSalesDiscountAmount.setEditable(false);
+
+        jLabel9.setText("Actual Price");
+
+        btnSell.setBackground(new java.awt.Color(51, 204, 0));
+        btnSell.setText("Sell");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSalesId, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(comboSalesProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(txtSalesUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSalesQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtSalesTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtSalesDiscountRate, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(277, 277, 277)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(txtSalesActualPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
+                        .addComponent(btnSell)))
+                .addContainerGap(68, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtSalesDiscountAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtSalesId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(comboSalesProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtSalesUnitPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtSalesQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtSalesTotalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtSalesDiscountRate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtSalesDiscountAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtSalesActualPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSell))
+                .addGap(0, 369, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSalesQuantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalesQuantityFocusLost
+        // TODO add your handling code here:
+        double unitPrice = Double.parseDouble(txtSalesUnitPrice.getText().trim());
+        double quantity = Double.parseDouble(txtSalesQuantity.getText().trim());
+        double totalPrice = salesutil.getTotalSalesPrice(unitPrice, quantity);
+        
+        txtSalesTotalPrice.setText(totalPrice + "");
+        
+
+    }//GEN-LAST:event_txtSalesQuantityFocusLost
+
+    private void txtSalesDiscountRateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalesDiscountRateFocusLost
+        // TODO add your handling code here:
+        double unitPrice = Double.parseDouble(txtSalesUnitPrice.getText().trim());
+        double quantity = Double.parseDouble(txtSalesQuantity.getText().trim());
+        double totalPrice = salesutil.getTotalSalesPrice(unitPrice, quantity);
+        
+        double discountRate = Double.parseDouble(txtSalesDiscountRate.getText().trim());
+        double discountAmount = salesutil.getDiscountAmount(totalPrice, discountRate);
+        txtSalesDiscountAmount.setText(discountAmount + "");
+        
+        double actualPrice = salesutil.getActualPrice(totalPrice, discountAmount);
+        txtSalesActualPrice.setText(actualPrice + "");
+
+    }//GEN-LAST:event_txtSalesDiscountRateFocusLost
 
     /**
      * @param args the command line arguments
@@ -78,5 +267,24 @@ public class SalesView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSell;
+    private javax.swing.JComboBox<String> comboSalesProduct;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txtSalesActualPrice;
+    private javax.swing.JTextField txtSalesDiscountAmount;
+    private javax.swing.JTextField txtSalesDiscountRate;
+    private javax.swing.JTextField txtSalesId;
+    private javax.swing.JTextField txtSalesQuantity;
+    private javax.swing.JTextField txtSalesTotalPrice;
+    private javax.swing.JTextField txtSalesUnitPrice;
     // End of variables declaration//GEN-END:variables
 }
