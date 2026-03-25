@@ -2,27 +2,19 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package lesson10inheritance;
-
-import lesson10inheritance.PracSet.Circle;
-import lesson10inheritance.PracSet.Cylinder;
+package lesson11abstractclassinterface;
 
 /**
  *
  * @author Administrator
  */
-public class Lesson10Inheritance {
+public class Lesson11AbstractClassInterface {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Circle c = new Cylinder(12, 5);
-        System.out.println("\n" + c.getArea());
-        Cylinder cl = new Cylinder(15, 3);
-        System.out.println(cl.getVolume());
-
     }
-
+    
 }
