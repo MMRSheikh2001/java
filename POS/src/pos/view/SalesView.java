@@ -7,6 +7,7 @@ package pos.view;
 import java.util.List;
 import pos.dao.ProductDao;
 import pos.dao.SalesDao;
+import pos.model.Sales;
 import pos.util.SalesUtil;
 
 /**
@@ -15,6 +16,7 @@ import pos.util.SalesUtil;
  */
 public class SalesView extends javax.swing.JFrame {
     
+    Sales s;
     ProductDao pd = new ProductDao();
     SalesDao salesdao = new SalesDao();
     SalesUtil salesutil = new SalesUtil();
@@ -35,6 +37,19 @@ public class SalesView extends javax.swing.JFrame {
             
             comboSalesProduct.addItem(p);
         }
+        
+    }
+    
+    public void clearData() {
+        txtSalesId.setText("");
+        comboSalesProduct.setSelectedIndex(0);
+        
+        txtSalesUnitPrice.setText("");
+        txtSalesQuantity.setText("");
+        txtSalesTotalPrice.setText("");
+        txtSalesDiscountRate.setText("");
+        txtSalesDiscountAmount.setText("");
+        txtSalesActualPrice.setText("");
         
     }
 
@@ -124,6 +139,11 @@ public class SalesView extends javax.swing.JFrame {
 
         btnSell.setBackground(new java.awt.Color(51, 204, 0));
         btnSell.setText("Sell");
+        btnSell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSellMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -230,6 +250,22 @@ public class SalesView extends javax.swing.JFrame {
         txtSalesActualPrice.setText(actualPrice + "");
 
     }//GEN-LAST:event_txtSalesDiscountRateFocusLost
+
+    private void btnSellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSellMouseClicked
+        // TODO add your handling code here:
+        String productName = comboSalesProduct.getSelectedItem().toString();
+        double unitPrice = Double.parseDouble(txtSalesUnitPrice.getText().trim());
+        double quantity = Double.parseDouble(txtSalesQuantity.getText().trim());
+        double totalPrice = Double.parseDouble(txtSalesTotalPrice.getText().trim());
+        double discount = Double.parseDouble(txtSalesDiscountRate.getText().trim());
+        double actualPrice = Double.parseDouble(txtSalesActualPrice.getText().trim());
+        
+        s = new Sales(productName, unitPrice, quantity, totalPrice, discount, actualPrice);
+        salesdao.save(s);
+        clearData();
+        
+
+    }//GEN-LAST:event_btnSellMouseClicked
 
     /**
      * @param args the command line arguments

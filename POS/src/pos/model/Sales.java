@@ -4,6 +4,8 @@
  */
 package pos.model;
 
+import java.util.Date;
+
 /**
  *
  * @author Administrator
@@ -17,6 +19,7 @@ public class Sales {
     private double totalPrice;
     private double discount;
     private double actualPrice;
+    private Date date;
 
     public Sales() {
     }
@@ -94,6 +97,20 @@ public class Sales {
 
     public void setActualPrice(double actualPrice) {
         this.actualPrice = actualPrice;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public java.sql.Date getSqlDate() {
+
+        return new java.sql.Date(new Date().getTime());
+
     }
 
     @Override

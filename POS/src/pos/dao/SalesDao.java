@@ -32,7 +32,7 @@ public class SalesDao implements DaoService<Sales> {
 
     @Override
     public void save(Sales e) {
-        sql = "insert into sales (productName,unitPrice,quantity,totalPrice,discount,actualPrice) values(?,?,?,?,?,?)";
+        sql = "insert into sales (productName,unitPrice,quantity,totalPrice,discount,actualPrice,date) values(?,?,?,?,?,?,?)";
         
         double totalPrice=su.getTotalSalesPrice(e.getUnitPrice(), e.getQuantity());
         double discountAmount=su.getDiscountAmount(totalPrice, e.getDiscount());
@@ -48,6 +48,7 @@ public class SalesDao implements DaoService<Sales> {
             ps.setDouble(4, totalPrice);
             ps.setDouble(5, e.getDiscount());
             ps.setDouble(6, actualPrice);
+            ps.setDate(7, e.getSqlDate());
             ps.executeUpdate();
 
             ps.close();
