@@ -15,10 +15,49 @@ public class Lesson13MultiThread {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        
-        
-        
+
+        myThread12 t1 = new myThread12();
+        myThread22 t2 = new myThread22();
+
+        t1.start();
+        t2.start();
+        System.out.println(t1.getId());
+
+    }
+
+}
+
+class myThread12 extends Thread {
+
+    @Override
+    public void run() {
+        int i = 0;
+        while (i < 300) {
+
+            System.out.println("My cooking Thread1 is running");
+            System.out.println("I am happy");
+            i++;
+
+        }
+
+    }
+
+}
+
+class myThread22 extends Thread {
+
+    @Override
+    public void run() {
+        int i = 0;
+        while (i < 300) {
+
+            System.out.println("My Thread2 is running");
+            System.out.println("I am sad");
+
+            i++;
+
+        }
+
     }
 
 }
