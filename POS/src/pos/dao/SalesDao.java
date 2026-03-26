@@ -27,19 +27,17 @@ public class SalesDao implements DaoService<Sales> {
     PreparedStatement ps;
     ResultSet rs;
     String sql;
-    
-    SalesUtil su=new SalesUtil();
+
+    SalesUtil su = new SalesUtil();
 
     @Override
     public void save(Sales e) {
         sql = "insert into sales (productName,unitPrice,quantity,totalPrice,discount,actualPrice,date) values(?,?,?,?,?,?,?)";
-        
-        double totalPrice=su.getTotalSalesPrice(e.getUnitPrice(), e.getQuantity());
-        double discountAmount=su.getDiscountAmount(totalPrice, e.getDiscount());
-        double actualPrice=su.getActualPrice(totalPrice, discountAmount);
-        
-        
-        
+
+        double totalPrice = su.getTotalSalesPrice(e.getUnitPrice(), e.getQuantity());
+        double discountAmount = su.getDiscountAmount(totalPrice, e.getDiscount());
+        double actualPrice = su.getActualPrice(totalPrice, discountAmount);
+
         try {
             ps = db.getCon().prepareStatement(sql);
             ps.setString(1, e.getProductName());

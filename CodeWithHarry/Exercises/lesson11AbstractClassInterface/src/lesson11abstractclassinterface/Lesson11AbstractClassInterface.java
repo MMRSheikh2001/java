@@ -4,6 +4,11 @@
  */
 package lesson11abstractclassinterface;
 
+import lesson11abstractclassinterface.PracSet.Human;
+import lesson11abstractclassinterface.PracSet.Monkey;
+import lesson11abstractclassinterface.PracSet.SmartPhone;
+import lesson11abstractclassinterface.PracSet.TelePhone;
+
 /**
  *
  * @author Administrator
@@ -15,6 +20,15 @@ public class Lesson11AbstractClassInterface {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        TelePhone tp = new SmartPhone();
+        tp.ring();
+        tp.lift();
+        tp.disconnect();
+
+        Monkey m = new Human();
+        m.bite();
+        m.jump();
+
     }
-    
+
 }
