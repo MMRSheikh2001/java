@@ -4,6 +4,8 @@
  */
 package lesson14errorsexceptions;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Administrator
@@ -15,9 +17,7 @@ public class Lesson14ErrorsExceptions {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        
-        
+ 
+
     }
-    
 }
