@@ -17,7 +17,13 @@ public class Lesson14ErrorsExceptions {
      */
     public static void main(String[] args) {
         // TODO code application logic here
- 
+        try {
+            System.out.println(5 / 0);
+        } catch (ArithmeticException a) {
+            System.out.println("arith ex");
+
+        } catch (Exception e) {
+        }
 
     }
 }
