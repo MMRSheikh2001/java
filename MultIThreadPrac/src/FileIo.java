@@ -21,7 +21,7 @@ public class FileIo {
         File file = new File("hello.dat");
         try {
             FileOutputStream out = new FileOutputStream(file);
-            for (int i = 0; i < 100; i++) {
+            for (int i = 1; i <= 100; i++) {
                 out.write(i);
 
             }
@@ -36,7 +36,11 @@ public class FileIo {
             int value;
             while ((value = input.read()) != -1) {
 
-                System.out.println(value);
+                System.out.print(value + "\t");
+                if (value % 10 == 0) {
+
+                    System.out.println("");
+                }
 
             }
 
