@@ -15,7 +15,7 @@ import pos.util.SalesUtil;
  * @author Administrator
  */
 public class SalesView extends javax.swing.JFrame {
-    
+
     Sales s;
     ProductDao pd = new ProductDao();
     SalesDao salesdao = new SalesDao();
@@ -26,31 +26,32 @@ public class SalesView extends javax.swing.JFrame {
      */
     public SalesView() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         loadAllProduct();
     }
-    
+
     public void loadAllProduct() {
         List<String> pList = pd.getAllProductName();
         comboSalesProduct.removeAllItems();
         comboSalesProduct.addItem("--Select Product");
         for (String p : pList) {
-            
+
             comboSalesProduct.addItem(p);
         }
-        
+
     }
-    
+
     public void clearData() {
         txtSalesId.setText("");
         comboSalesProduct.setSelectedIndex(0);
-        
+
         txtSalesUnitPrice.setText("");
         txtSalesQuantity.setText("");
         txtSalesTotalPrice.setText("");
         txtSalesDiscountRate.setText("");
         txtSalesDiscountAmount.setText("");
         txtSalesActualPrice.setText("");
-        
+
     }
 
     /**
@@ -230,9 +231,9 @@ public class SalesView extends javax.swing.JFrame {
         double unitPrice = Double.parseDouble(txtSalesUnitPrice.getText().trim());
         double quantity = Double.parseDouble(txtSalesQuantity.getText().trim());
         double totalPrice = salesutil.getTotalSalesPrice(unitPrice, quantity);
-        
+
         txtSalesTotalPrice.setText(totalPrice + "");
-        
+
 
     }//GEN-LAST:event_txtSalesQuantityFocusLost
 
@@ -241,11 +242,11 @@ public class SalesView extends javax.swing.JFrame {
         double unitPrice = Double.parseDouble(txtSalesUnitPrice.getText().trim());
         double quantity = Double.parseDouble(txtSalesQuantity.getText().trim());
         double totalPrice = salesutil.getTotalSalesPrice(unitPrice, quantity);
-        
+
         double discountRate = Double.parseDouble(txtSalesDiscountRate.getText().trim());
         double discountAmount = salesutil.getDiscountAmount(totalPrice, discountRate);
         txtSalesDiscountAmount.setText(discountAmount + "");
-        
+
         double actualPrice = salesutil.getActualPrice(totalPrice, discountAmount);
         txtSalesActualPrice.setText(actualPrice + "");
 
@@ -259,11 +260,11 @@ public class SalesView extends javax.swing.JFrame {
         double totalPrice = Double.parseDouble(txtSalesTotalPrice.getText().trim());
         double discount = Double.parseDouble(txtSalesDiscountRate.getText().trim());
         double actualPrice = Double.parseDouble(txtSalesActualPrice.getText().trim());
-        
+
         s = new Sales(productName, unitPrice, quantity, totalPrice, discount, actualPrice);
         salesdao.save(s);
         clearData();
-        
+
 
     }//GEN-LAST:event_btnSellMouseClicked
 
