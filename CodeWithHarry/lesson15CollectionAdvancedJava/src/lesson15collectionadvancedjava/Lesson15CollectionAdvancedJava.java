@@ -15,7 +15,10 @@ public class Lesson15CollectionAdvancedJava {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        //WikiPedia has collection hirerarchy picture
+        //Oracle has good api list that can be referred
         
+        //Hashing class : HashSet, HashMap,LinkedHashMap,HashTable
         
         
     }
