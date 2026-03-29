@@ -32,8 +32,12 @@ public class ClassTestMarch29 {
                 }
 
             }
-
+System.out.println(Arrays.toString(item));
         }
+
+//        for (int[] item : arr) {
+//            System.out.println(Arrays.toString(item));
+//        }
         System.out.println(Arrays.deepToString(arr));
 
     }
