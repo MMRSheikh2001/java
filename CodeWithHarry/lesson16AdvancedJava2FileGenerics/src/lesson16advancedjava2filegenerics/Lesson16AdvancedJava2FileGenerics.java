@@ -15,8 +15,33 @@ public class Lesson16AdvancedJava2FileGenerics {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
-        
+        //Annoymonous Class
+
+        System.out.println(sum(12, 13));
+
+        Shape s = new Shape() {
+            @Override
+            public double getArea(double radius) {
+                return super.getArea(radius); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+            }
+
+        };
+        System.out.println(s.getArea(13));
     }
-    
+
+    @Deprecated
+    public static int sum(int a, int b) {
+
+        return a + b;
+    }
+
+}
+
+abstract class Shape {
+
+    public double getArea(double radius) {
+
+        return Math.PI * Math.pow(radius, 2);
+    }
+
 }
