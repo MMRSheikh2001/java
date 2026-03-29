@@ -28,21 +28,10 @@ public class Library {
     public void issueBook(String bookName, String issueTo) {
 
         Book b = new Book();
-//        if ((b.getBookName()).equalsIgnoreCase(bookName) && (b.getIssuedTo()).equals(null)) {
-//            System.out.println("Here's The Book : " + b.getBookName());
-////            //     bookList.remove(b.getBookName());
-////            int index = bookList.indexOf(b);
-////            //     b= new Book(bookName, bookName, issueTo, issueDate);
-////            Date d = new Date();
-////            b.setIssueDate(d);
-////
-////            b.setIssuedTo(issueTo);
-////
-//        }
 
         boolean found = false;
         for (Book item : bookList) {
-            if ((item.getBookName()).equalsIgnoreCase(bookName) && (item.getIssuedTo()).equals(null)) {
+            if ((item.getBookName()).equalsIgnoreCase(bookName) && (item.getIssuedTo()) == null) {
                 found = true;
                 System.out.println("Here's The Book : " + item.getBookName());
                 int index = bookList.indexOf(item);
@@ -52,8 +41,43 @@ public class Library {
             }
 
         }
-        if(found==false){
+        if (found == false) {
             System.out.println("Book Not Available/Found");
+        }
+
+    }
+
+    public void returnBook(String bookName, String issueTo) {
+
+        Book b;
+        boolean found = false;
+        for (Book item : bookList) {
+            try {
+                if ((item.getBookName()).equalsIgnoreCase(bookName) && item.getIssuedTo().equalsIgnoreCase(issueTo)) {
+
+                    found = true;
+                    System.out.println("Thanks For Returning The Book : " + item.getBookName());
+                    int index = bookList.indexOf(item);
+                    b = new Book(item.getBookName(), item.getAuthorName(), null, null);
+                    bookList.set(index, b);
+
+                }
+
+            } catch (Exception e) {
+            }
+
+        }
+        if (found == false) {
+            System.out.println("No Such Book was Issued/ Book Not found");
+
+        }
+    }
+
+    public void showBookList() {
+        for (Book item : bookList) {
+
+            System.out.println(item);
+
         }
 
     }
