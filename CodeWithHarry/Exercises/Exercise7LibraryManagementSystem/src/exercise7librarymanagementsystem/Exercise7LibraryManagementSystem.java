@@ -4,6 +4,8 @@
  */
 package exercise7librarymanagementsystem;
 
+import java.util.Date;
+
 /**
  *
  * @author Administrator
@@ -23,7 +25,8 @@ public class Exercise7LibraryManagementSystem {
         //assume all the users are registered in centered database
         //
         //
-        //
+        Date d= new Date();
+        System.out.println(d);
     }
     
 }

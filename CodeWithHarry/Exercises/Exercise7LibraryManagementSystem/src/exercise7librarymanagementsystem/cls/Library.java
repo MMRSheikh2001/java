@@ -4,10 +4,42 @@
  */
 package exercise7librarymanagementsystem.cls;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+
 /**
  *
  * @author Administrator
  */
 public class Library {
+    //  HashMap<Integer, Book> bookList= new HashMap<>();
+
+    LinkedList<Book> bookList = new LinkedList<>();
+
+    public void addBooks(String bookName, String authorName) {
+
+        Book b = new Book(bookName, authorName, null, null);
+        bookList.add(b);
+        System.out.println(b);
+
+    }
+
+    public void issueBook(String bookName, String issueTo) {
+
+        Book b = new Book();
+        if ((b.getBookName()).equalsIgnoreCase(bookName) && (b.getIssuedTo()).equals(null)) {
+            System.out.println("Here's The Book : " + b.getBookName());
+            //     bookList.remove(b.getBookName());
+            int index = bookList.indexOf(b);
+            //     b= new Book(bookName, bookName, issueTo, issueDate);
+            Date d = new Date();
+            b.setIssueDate(d);
+
+            b.setIssuedTo(issueTo);
+
+        }
+
+    }
 
 }
