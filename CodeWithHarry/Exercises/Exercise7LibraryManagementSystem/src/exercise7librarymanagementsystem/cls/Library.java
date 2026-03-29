@@ -28,17 +28,17 @@ public class Library {
     public void issueBook(String bookName, String issueTo) {
 
         Book b = new Book();
-        if ((b.getBookName()).equalsIgnoreCase(bookName) && (b.getIssuedTo()).equals(null)) {
-            System.out.println("Here's The Book : " + b.getBookName());
-            //     bookList.remove(b.getBookName());
-            int index = bookList.indexOf(b);
-            //     b= new Book(bookName, bookName, issueTo, issueDate);
-            Date d = new Date();
-            b.setIssueDate(d);
-
-            b.setIssuedTo(issueTo);
-
-        }
+//        if ((b.getBookName()).equalsIgnoreCase(bookName) && (b.getIssuedTo()).equals(null)) {
+//            System.out.println("Here's The Book : " + b.getBookName());
+//            //     bookList.remove(b.getBookName());
+//            int index = bookList.indexOf(b);
+//            //     b= new Book(bookName, bookName, issueTo, issueDate);
+//            Date d = new Date();
+//            b.setIssueDate(d);
+//
+//            b.setIssuedTo(issueTo);
+//
+//        }
 
     }
 
