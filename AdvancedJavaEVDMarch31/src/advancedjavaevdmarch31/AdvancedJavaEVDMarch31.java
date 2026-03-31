@@ -9,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,6 +28,134 @@ public class AdvancedJavaEVDMarch31 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Welcome to Library\nWhat do you want to do?"
+                + "\n1 : Add Book"
+                + "\n2 : Issue Book"
+                + "\n3 : Update Book"
+                + "\n4 : Return Book"
+                + "\n5 : Remove Book"
+                + "\n6 : Show Book"
+                + "\n7 : Cancel");
+
+        int n = sc.nextInt();
+        while (n != 7) {
+            if (n == 1) {
+                sc.nextLine();
+                System.out.println("What is the Book's Name?");
+                String bookName = sc.nextLine();
+                bookName = bookName.trim();
+                System.out.println("Who is The author of the Book?");
+                String author = sc.nextLine();
+                addBooks(bookName, author);
+
+                System.out.println("What do you want to do?"
+                        + "\n1 : Add Book"
+                        + "\n2 : Issue Book"
+                        + "\n3 : Update Book"
+                        + "\n4 : Return Book"
+                        + "\n5 : Remove Book"
+                        + "\n6 : Show Book"
+                        + "\n7 : Cancel");
+
+                n = sc.nextInt();
+            }
+            if (n == 2) {
+                sc.nextLine();
+                System.out.println("What book do you want to Issue?");
+                String bookName = sc.nextLine();
+                bookName = bookName.trim();
+                int id = getIdByBookName(bookName);
+                System.out.println("What is the Issuee's Name?");
+                String issuee = sc.nextLine();
+                String author = getAuthorById(id);
+                updateBook(bookName, author, issuee, id);
+
+                System.out.println("What do you want to do?"
+                        + "\n1 : Add Book"
+                        + "\n2 : Issue Book"
+                        + "\n3 : Update Book"
+                        + "\n4 : Return Book"
+                        + "\n5 : Remove Book"
+                        + "\n6 : Show Book"
+                        + "\n7 : Cancel");
+
+                n = sc.nextInt();
+            }
+            if (n == 3) {
+                sc.nextLine();
+                System.out.println("What is The Book Id?");
+                int id = sc.nextInt();
+                System.out.println("What Book Name to Set?");
+                String bookName = sc.nextLine();
+                bookName = bookName.trim();
+
+                System.out.println("What Author Name to Set?");
+                String author = sc.nextLine();
+
+                System.out.println("What Issuee Name to set?");
+                String issuee = sc.nextLine();
+                updateBook(bookName, author, issuee, id);
+                System.out.println("What do you want to do?"
+                        + "\n1 : Add Book"
+                        + "\n2 : Issue Book"
+                        + "\n3 : Update Book"
+                        + "\n4 : Return Book"
+                        + "\n5 : Remove Book"
+                        + "\n6 : Show Book"
+                        + "\n7 : Cancel");
+
+                n = sc.nextInt();
+            }
+            if (n == 4) {
+                sc.nextLine();
+                System.out.println("What Book to Return?");
+                String bookName = sc.nextLine();
+                System.out.println("What do you want to do?"
+                        + "\n1 : Add Book"
+                        + "\n2 : Issue Book"
+                        + "\n3 : Update Book"
+                        + "\n4 : Return Book"
+                        + "\n5 : Remove Book"
+                        + "\n6 : Show Book"
+                        + "\n7 : Cancel");
+
+                n = sc.nextInt();
+            }
+            if (n == 5) {
+                sc.nextLine();
+                System.out.println("What is the Book Name to Remove?");
+                String bookName = sc.nextLine();
+                bookName = bookName.trim();
+                int id = getIdByBookName(bookName);
+                deleteBook(id);
+                System.out.println("What do you want to do?"
+                        + "\n1 : Add Book"
+                        + "\n2 : Issue Book"
+                        + "\n3 : Update Book"
+                        + "\n4 : Return Book"
+                        + "\n5 : Remove Book"
+                        + "\n6 : Show Book"
+                        + "\n7 : Cancel");
+
+                n = sc.nextInt();
+            }
+            if (n == 6) {
+                sc.nextLine();
+                showBooks();
+                System.out.println("What do you want to do?"
+                        + "\n1 : Add Book"
+                        + "\n2 : Issue Book"
+                        + "\n3 : Update Book"
+                        + "\n4 : Return Book"
+                        + "\n5 : Remove Book"
+                        + "\n6 : Show Book"
+                        + "\n7 : Cancel");
+
+                n = sc.nextInt();
+            }
+
+        }
 
     }
 
@@ -123,6 +252,24 @@ public class AdvancedJavaEVDMarch31 {
         }
 
         return id;
+    }
+
+    public static String getAuthorById(int id) {
+        String author = null;
+        String sql = "select authorName from book where id=?";
+        try {
+            ps = getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                author = rs.getString("authorName");
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdvancedJavaEVDMarch31.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return author;
     }
 
     public static void deleteBook(int id) {
