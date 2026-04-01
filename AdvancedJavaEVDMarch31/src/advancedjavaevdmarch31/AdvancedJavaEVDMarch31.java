@@ -111,6 +111,16 @@ public class AdvancedJavaEVDMarch31 {
                 sc.nextLine();
                 System.out.println("What Book to Return?");
                 String bookName = sc.nextLine();
+                bookName = bookName.trim();
+                int id = getIdByBookName(bookName);
+                String author = getAuthorById(id);
+                String issuee = getIssueeById(id);
+                if (issuee != null) {
+                    updateBook(bookName, author, null, id);
+                    System.out.println("Thanks for Returning The Book");
+
+                }
+
                 System.out.println("What do you want to do?"
                         + "\n1 : Add Book"
                         + "\n2 : Issue Book"
@@ -229,9 +239,11 @@ public class AdvancedJavaEVDMarch31 {
             ps.executeUpdate();
             ps.close();
             getCon().close();
+            System.out.println("Book Updated");
             showBooks();
         } catch (SQLException ex) {
             Logger.getLogger(AdvancedJavaEVDMarch31.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Book Updated");
         }
 
     }
@@ -270,6 +282,24 @@ public class AdvancedJavaEVDMarch31 {
         }
 
         return author;
+    }
+
+    public static String getIssueeById(int id) {
+        String issuee = null;
+        String sql = "select issueTo from book where id=?";
+        try {
+            ps = getCon().prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                issuee = rs.getString("issueTo");
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdvancedJavaEVDMarch31.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return issuee;
     }
 
     public static void deleteBook(int id) {
