@@ -86,6 +86,7 @@ public class AdvancedJavaEVDMarch31 {
                 sc.nextLine();
                 System.out.println("What is The Book Id?");
                 int id = sc.nextInt();
+                sc.nextLine();
                 System.out.println("What Book Name to Set?");
                 String bookName = sc.nextLine();
                 bookName = bookName.trim();
