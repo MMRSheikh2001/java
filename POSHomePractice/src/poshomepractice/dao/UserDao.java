@@ -17,29 +17,29 @@ import poshomepractice.util.DbUtil;
  * @author Administrator
  */
 public class UserDao {
+
     DbUtil util = new DbUtil();
     PreparedStatement ps;
     ResultSet rs;
     String sql = null;
-    
-    public void saveUser(User user){
-    sql = "insert into user(userName,password) values(?,?)";
+
+    public void saveUser(User user) {
+        sql = "insert into user(userName,password,role) values(?,?,?)";
         try {
             ps = util.getCon().prepareStatement(sql);
             ps.setString(1, user.getUserName());
             ps.setString(2, user.getPassword());
-            
+            ps.setString(3, user.getRole());
+
             ps.executeUpdate();
             ps.close();
             util.getCon().close();
             System.out.println("Data Save (Home)");
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(UserDao.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
     }
-    
-    
+
 }

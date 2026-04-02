@@ -9,12 +9,19 @@ package poshomepractice.model;
  * @author Administrator
  */
 public class User {
+
     private int id;
     private String userName;
     private String password;
     private String role;
 
     public User() {
+    }
+
+    public User(String userName, String password, String role) {
+        this.userName = userName;
+        this.password = password;
+        this.role = role;
     }
 
     public User(String userName, String password) {
@@ -53,7 +60,5 @@ public class User {
     public void setRole(String role) {
         this.role = "Admin";
     }
-    
-    
-    
+
 }

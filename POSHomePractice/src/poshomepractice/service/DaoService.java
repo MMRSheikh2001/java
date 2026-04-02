@@ -4,10 +4,21 @@
  */
 package poshomepractice.service;
 
+import java.util.List;
+
 /**
  *
  * @author Administrator
  */
-public interface DaoService {
-    
+public interface DaoService<E> {
+
+    void save(E e);
+
+    List<E> findAll();
+
+    void update(E e);
+
+    E findById(int id);
+
+    void delete(int id);
 }
