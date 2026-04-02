@@ -146,15 +146,15 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String userName = txtUserName.getText().trim();
         String password = txtPassword.getText().trim();
-        if(userName.equalsIgnoreCase("mahbub") && password.equals("1234")){
+        if (userName.equalsIgnoreCase("mahbub") && password.equals("1234")) {
             DashBoard db = new DashBoard();
             db.setVisible(true);
             this.dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(rootPane, "Invalid User Name or Password");
         }
         
-        
+
     }//GEN-LAST:event_btnSubmitMouseClicked
 
     /**
