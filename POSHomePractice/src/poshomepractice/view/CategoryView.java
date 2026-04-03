@@ -4,17 +4,46 @@
  */
 package poshomepractice.view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import poshomepractice.dao.CategoryDao;
+import poshomepractice.model.Category;
+
 /**
  *
  * @author Administrator
  */
 public class CategoryView extends javax.swing.JFrame {
 
+    CategoryDao categoryDao = new CategoryDao();
+    Category c;
+
     /**
      * Creates new form CategoryView
      */
     public CategoryView() {
+
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        showCategory();
+    }
+
+    public void clearData() {
+
+        txtCategoryId.setText("");
+        txtCategoryName.setText("");
+    }
+
+    public void showCategory() {
+        String[] list = {"SL", "Name"};
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(list);
+        tblCategoryView.setModel(model);
+        List<Category> cList = categoryDao.findAll();
+        for (Category c : cList) {
+            model.addRow(new Object[]{c.getId(), c.getName()});
+        }
+
     }
 
     /**
@@ -69,15 +98,35 @@ public class CategoryView extends javax.swing.JFrame {
 
         btnCategorySave.setBackground(new java.awt.Color(51, 102, 0));
         btnCategorySave.setText("Save");
+        btnCategorySave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCategorySaveMouseClicked(evt);
+            }
+        });
 
         btnCategoryUpdate.setBackground(new java.awt.Color(255, 255, 51));
         btnCategoryUpdate.setText("Update");
+        btnCategoryUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCategoryUpdateMouseClicked(evt);
+            }
+        });
 
         btnCategoryDelete.setBackground(new java.awt.Color(204, 0, 0));
         btnCategoryDelete.setText("Delete");
+        btnCategoryDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCategoryDeleteMouseClicked(evt);
+            }
+        });
 
         btnCategoryReset.setBackground(new java.awt.Color(0, 102, 102));
         btnCategoryReset.setText("Reset");
+        btnCategoryReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnCategoryResetMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -137,6 +186,11 @@ public class CategoryView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblCategoryView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCategoryViewMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCategoryView);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -161,6 +215,53 @@ public class CategoryView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCategorySaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategorySaveMouseClicked
+        // TODO add your handling code here:
+        String name = txtCategoryName.getText().trim();
+        c = new Category(name);
+        categoryDao.save(c);
+        clearData();
+        showCategory();
+
+    }//GEN-LAST:event_btnCategorySaveMouseClicked
+
+    private void btnCategoryResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoryResetMouseClicked
+        // TODO add your handling code here:
+        clearData();
+    }//GEN-LAST:event_btnCategoryResetMouseClicked
+
+    private void tblCategoryViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCategoryViewMouseClicked
+        // TODO add your handling code here:
+        int row = tblCategoryView.getSelectedRow();
+        String id = tblCategoryView.getModel().getValueAt(row, 0).toString();
+        String name = tblCategoryView.getModel().getValueAt(row, 1).toString();
+
+        txtCategoryId.setText(id);
+        txtCategoryName.setText(name);
+
+    }//GEN-LAST:event_tblCategoryViewMouseClicked
+
+    private void btnCategoryUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoryUpdateMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtCategoryId.getText().trim());
+        String name = txtCategoryName.getText().trim();
+        c = new Category(id, name);
+        categoryDao.update(c);
+        clearData();
+        showCategory();
+
+
+    }//GEN-LAST:event_btnCategoryUpdateMouseClicked
+
+    private void btnCategoryDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoryDeleteMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtCategoryId.getText().trim());
+        categoryDao.delete(id);
+        clearData();
+        showCategory();
+
+    }//GEN-LAST:event_btnCategoryDeleteMouseClicked
 
     /**
      * @param args the command line arguments

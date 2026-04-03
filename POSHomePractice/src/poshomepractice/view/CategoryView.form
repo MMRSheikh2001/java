@@ -163,6 +163,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Save"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCategorySaveMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCategoryUpdate">
           <Properties>
@@ -171,6 +174,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Update"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCategoryUpdateMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCategoryDelete">
           <Properties>
@@ -179,6 +185,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Delete"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCategoryDeleteMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCategoryReset">
           <Properties>
@@ -187,6 +196,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Reset"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnCategoryResetMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -208,6 +220,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblCategoryViewMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
