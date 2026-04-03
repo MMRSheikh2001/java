@@ -56,6 +56,11 @@ public class DashBoard extends javax.swing.JFrame {
         btnToSupplier.setBackground(new java.awt.Color(204, 204, 255));
         btnToSupplier.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnToSupplier.setText("Supplier");
+        btnToSupplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnToSupplierMouseClicked(evt);
+            }
+        });
 
         btnToProduct.setBackground(new java.awt.Color(255, 102, 102));
         btnToProduct.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -114,6 +119,12 @@ public class DashBoard extends javax.swing.JFrame {
         cv.setVisible(true);
         
     }//GEN-LAST:event_btnToCategoryMouseClicked
+
+    private void btnToSupplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnToSupplierMouseClicked
+        // TODO add your handling code here:
+        SupplierView sv = new SupplierView();
+        sv.setVisible(true);
+    }//GEN-LAST:event_btnToSupplierMouseClicked
 
     /**
      * @param args the command line arguments
