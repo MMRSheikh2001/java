@@ -111,6 +111,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Product"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnToProductMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnToSales">
       <Properties>

@@ -4,11 +4,19 @@
  */
 package poshomepractice.view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import poshomepractice.dao.SupplierDao;
+import poshomepractice.model.Supplier;
+
 /**
  *
  * @author Administrator
  */
 public class SupplierView extends javax.swing.JFrame {
+
+    SupplierDao supplierDao = new SupplierDao();
+    Supplier s;
 
     /**
      * Creates new form SupplierView
@@ -16,6 +24,31 @@ public class SupplierView extends javax.swing.JFrame {
     public SupplierView() {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        showSupplier();
+    }
+
+    public void showSupplier() {
+        String[] list = {"SL", "Name", "Cell No", "Contact Person Name", "Contact Person Cell", "Address"};
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(list);
+        tblSupplierView.setModel(model);
+
+        List<Supplier> sList = supplierDao.findAll();
+        for (Supplier s : sList) {
+            model.addRow(new Object[]{s.getId(), s.getName(), s.getCell(), s.getContactPersonName(), s.getContactPersonCell(), s.getAddress()});
+
+        }
+
+    }
+
+    public void clearData() {
+        txtSupplierId.setText("");
+        txtSupplierName.setText("");
+        txtContactPersonCell.setText("");
+        txtContactPersonName.setText("");
+        txtSupplierAddress.setText("");
+        txtSupplierCell.setText("");
+
     }
 
     /**
@@ -86,15 +119,35 @@ public class SupplierView extends javax.swing.JFrame {
 
         btnSupplierSave.setBackground(new java.awt.Color(51, 153, 0));
         btnSupplierSave.setText("Save");
+        btnSupplierSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSupplierSaveMouseClicked(evt);
+            }
+        });
 
         btnSupplierUpdate.setBackground(new java.awt.Color(255, 255, 0));
         btnSupplierUpdate.setText("Update");
+        btnSupplierUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSupplierUpdateMouseClicked(evt);
+            }
+        });
 
         btnSupplierDelete.setBackground(new java.awt.Color(204, 0, 102));
         btnSupplierDelete.setText("Delete");
+        btnSupplierDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSupplierDeleteMouseClicked(evt);
+            }
+        });
 
         btnSupplierReset.setBackground(new java.awt.Color(0, 255, 204));
         btnSupplierReset.setText("Reset");
+        btnSupplierReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSupplierResetMouseClicked(evt);
+            }
+        });
 
         tblSupplierView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -107,6 +160,11 @@ public class SupplierView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblSupplierView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblSupplierViewMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblSupplierView);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -196,6 +254,69 @@ public class SupplierView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnSupplierSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSupplierSaveMouseClicked
+        // TODO add your handling code here:
+        String name = txtSupplierName.getText().trim();
+        String cell = txtSupplierCell.getText().trim();
+        String contactPersonName = txtContactPersonName.getText().trim();
+        String contactPersonCell = txtContactPersonCell.getText().trim();
+        String address = txtSupplierAddress.getText().trim();
+        s = new Supplier(name, cell, contactPersonName, contactPersonCell, address);
+        supplierDao.save(s);
+        clearData();
+        showSupplier();
+
+    }//GEN-LAST:event_btnSupplierSaveMouseClicked
+
+    private void btnSupplierUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSupplierUpdateMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtSupplierId.getText().trim());
+        String name = txtSupplierName.getText().trim();
+        String cell = txtSupplierCell.getText().trim();
+        String contactPersonName = txtContactPersonName.getText().trim();
+        String contactPersonCell = txtContactPersonCell.getText().trim();
+        String address = txtSupplierAddress.getText().trim();
+        s = new Supplier(id, name, cell, contactPersonName, contactPersonCell, address);
+        supplierDao.update(s);
+        clearData();
+        showSupplier();
+
+    }//GEN-LAST:event_btnSupplierUpdateMouseClicked
+
+    private void tblSupplierViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSupplierViewMouseClicked
+        // TODO add your handling code here:
+        int row = tblSupplierView.getSelectedRow();
+        String id = tblSupplierView.getModel().getValueAt(row, 0).toString();
+        String name = tblSupplierView.getModel().getValueAt(row, 1).toString();
+        String cell = tblSupplierView.getModel().getValueAt(row, 2).toString();
+        String contactPersonName = tblSupplierView.getModel().getValueAt(row, 3).toString();
+        String contactPersonCell = tblSupplierView.getModel().getValueAt(row, 4).toString();
+        String address = tblSupplierView.getModel().getValueAt(row, 5).toString();
+
+        txtSupplierId.setText(id);
+        txtSupplierName.setText(name);
+        txtContactPersonCell.setText(contactPersonCell);
+        txtContactPersonName.setText(contactPersonName);
+        txtSupplierAddress.setText(address);
+        txtSupplierCell.setText(cell);
+
+
+    }//GEN-LAST:event_tblSupplierViewMouseClicked
+
+    private void btnSupplierDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSupplierDeleteMouseClicked
+        // TODO add your handling code here:
+
+        int id = Integer.parseInt(txtSupplierId.getText().trim());
+        supplierDao.delete(id);
+        clearData();
+        showSupplier();
+    }//GEN-LAST:event_btnSupplierDeleteMouseClicked
+
+    private void btnSupplierResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSupplierResetMouseClicked
+        // TODO add your handling code here:
+        clearData();
+    }//GEN-LAST:event_btnSupplierResetMouseClicked
 
     /**
      * @param args the command line arguments
