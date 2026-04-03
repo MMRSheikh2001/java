@@ -67,6 +67,11 @@ public class DashBoard extends javax.swing.JFrame {
         btnToCategory.setBackground(new java.awt.Color(204, 255, 255));
         btnToCategory.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         btnToCategory.setText("Category");
+        btnToCategory.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnToCategoryMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -101,6 +106,13 @@ public class DashBoard extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnToCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnToCategoryMouseClicked
+        // TODO add your handling code here:
+        CategoryView cv = new CategoryView();
+        cv.setVisible(true);
+        
+    }//GEN-LAST:event_btnToCategoryMouseClicked
 
     /**
      * @param args the command line arguments
