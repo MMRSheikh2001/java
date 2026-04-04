@@ -4,9 +4,12 @@
  */
 package poshomepractice.view;
 
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 import poshomepractice.dao.CategoryDao;
 import poshomepractice.dao.ProductDao;
 import poshomepractice.dao.SupplierDao;
+import poshomepractice.model.Category;
 import poshomepractice.model.Product;
 
 /**
@@ -26,6 +29,62 @@ public class ProductView extends javax.swing.JFrame {
     public ProductView() {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        loadCategory();
+        loadSupplier();
+        showProduct();
+    }
+
+    public void loadCategory() {
+        cmbCategoryList.removeAllItems();
+        List<String> cList = cd.getAllCategoryName();
+        cmbCategoryList.addItem("--Select Category--");
+        for (String c : cList) {
+
+            cmbCategoryList.addItem(c);
+        }
+
+    }
+
+    public void loadSupplier() {
+        cmbSupplierList.removeAllItems();
+        List<String> sList = sd.getAllSupplierName();
+        cmbSupplierList.addItem("--Select Supplier--");
+        for (String s : sList) {
+            cmbSupplierList.addItem(s);
+
+        }
+    }
+
+    public int getCategoryIdByName(String name) {
+        return cd.findIdByName(name);
+    }
+
+    public int getSupplierIdByName(String name) {
+        return sd.findIdByName(name);
+    }
+
+    public void clearData() {
+        txtProductId.setText("");
+        txtProductName.setText("");
+        txtProductPrice.setText("");
+        txtProductQuantity.setText("");
+
+        cmbCategoryList.setSelectedIndex(0);
+        cmbSupplierList.setSelectedIndex(0);
+
+    }
+
+    public void showProduct() {
+        DefaultTableModel model = new DefaultTableModel();
+        String[] columns = {"SL", "Name", "Price", "Quantity", "Category Name", "Supplier Name"};
+        model.setColumnIdentifiers(columns);
+        tblProductView.setModel(model);
+        List<Product> pList = pd.findAll();
+        for (Product p : pList) {
+            model.addRow(new Object[]{p.getId(), p.getName(), p.getPrice(), p.getQuantity(), p.getCategoryName(), p.getSupplierName()});
+
+        }
+
     }
 
     /**
@@ -99,15 +158,35 @@ public class ProductView extends javax.swing.JFrame {
 
         btnProductDelete.setBackground(new java.awt.Color(204, 0, 51));
         btnProductDelete.setText("Delete");
+        btnProductDelete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductDeleteMouseClicked(evt);
+            }
+        });
 
         btnProductSave.setBackground(new java.awt.Color(0, 102, 0));
         btnProductSave.setText("Save");
+        btnProductSave.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductSaveMouseClicked(evt);
+            }
+        });
 
         btnProductReset.setBackground(new java.awt.Color(0, 204, 204));
         btnProductReset.setText("Reset");
+        btnProductReset.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductResetMouseClicked(evt);
+            }
+        });
 
         btnProductUpdate.setBackground(new java.awt.Color(255, 255, 0));
         btnProductUpdate.setText("Update");
+        btnProductUpdate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnProductUpdateMouseClicked(evt);
+            }
+        });
 
         tblProductView.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,6 +199,11 @@ public class ProductView extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblProductView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductViewMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblProductView);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,7 +287,6 @@ public class ProductView extends javax.swing.JFrame {
                             .addComponent(jLabel7)
                             .addComponent(cmbSupplierList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(51, 51, 51)))
-                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,6 +299,76 @@ public class ProductView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnProductSaveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductSaveMouseClicked
+        // TODO add your handling code here:
+        String name = txtProductName.getText().trim();
+        double price = Double.parseDouble(txtProductPrice.getText().trim());
+        double quantity = Double.parseDouble(txtProductQuantity.getText().trim());
+        String categoryName = cmbCategoryList.getSelectedItem().toString();
+        String supplierName = cmbSupplierList.getSelectedItem().toString();
+        int categoryId = getCategoryIdByName(categoryName);
+        int supplierId = getSupplierIdByName(supplierName);
+
+        p = new Product(name, price, quantity, categoryId, supplierId);
+        pd.save(p);
+        clearData();
+        showProduct();
+
+    }//GEN-LAST:event_btnProductSaveMouseClicked
+
+    private void tblProductViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductViewMouseClicked
+        // TODO add your handling code here:
+        int row = tblProductView.getSelectedRow();
+        String id = tblProductView.getModel().getValueAt(row, 0).toString();
+        String name = tblProductView.getModel().getValueAt(row, 1).toString();
+        String price = tblProductView.getModel().getValueAt(row, 2).toString();
+        String quantity = tblProductView.getModel().getValueAt(row, 3).toString();
+        String categoryName = tblProductView.getModel().getValueAt(row, 4).toString();
+        String supplierName = tblProductView.getModel().getValueAt(row, 5).toString();
+
+        txtProductId.setText(id);
+        txtProductName.setText(name);
+        txtProductPrice.setText(price);
+        txtProductQuantity.setText(quantity);
+        cmbCategoryList.setSelectedItem(categoryName);
+        cmbSupplierList.setSelectedItem(supplierName);
+
+
+    }//GEN-LAST:event_tblProductViewMouseClicked
+
+    private void btnProductUpdateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductUpdateMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtProductId.getText().trim());
+        String name = txtProductName.getText().trim();
+        double price = Double.parseDouble(txtProductPrice.getText().trim());
+        double quantity = Double.parseDouble(txtProductQuantity.getText().trim());
+        String categoryName = cmbCategoryList.getSelectedItem().toString();
+        String supplierName = cmbSupplierList.getSelectedItem().toString();
+        int categoryId = getCategoryIdByName(categoryName);
+        int supplierId = getSupplierIdByName(supplierName);
+
+        p = new Product(id, name, price, quantity, categoryId, supplierId);
+        pd.update(p);
+        clearData();
+        showProduct();
+
+
+    }//GEN-LAST:event_btnProductUpdateMouseClicked
+
+    private void btnProductDeleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductDeleteMouseClicked
+        // TODO add your handling code here:
+        int id = Integer.parseInt(txtProductId.getText().trim());
+        pd.delete(id);
+        clearData();
+        showProduct();
+
+    }//GEN-LAST:event_btnProductDeleteMouseClicked
+
+    private void btnProductResetMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductResetMouseClicked
+        // TODO add your handling code here:
+        clearData();
+    }//GEN-LAST:event_btnProductResetMouseClicked
 
     /**
      * @param args the command line arguments
