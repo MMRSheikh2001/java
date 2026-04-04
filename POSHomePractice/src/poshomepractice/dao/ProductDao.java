@@ -6,7 +6,11 @@ package poshomepractice.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import poshomepractice.model.Product;
 import poshomepractice.service.DaoService;
 import poshomepractice.util.DbUtil;
@@ -24,7 +28,23 @@ public class ProductDao implements DaoService<Product> {
 
     @Override
     public void save(Product e) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        sql = "insert into product (name,price,quantity,categoryId,supplierId) values(?,?,?,?,?)";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            ps.setString(1, e.getName());
+            ps.setDouble(2, e.getPrice());
+            ps.setDouble(3, e.getQuantity());
+            ps.setInt(4, e.getCategoryId());
+            ps.setInt(5, e.getSupplierId());
+            ps.executeUpdate();
+            ps.close();
+            db.getCon().close();
+            JOptionPane.showMessageDialog(null, "Product Saved");
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDao.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Product Not Saved");
+        }
+
     }
 
     @Override

@@ -144,4 +144,21 @@ public class SupplierDao implements DaoService<Supplier> {
         return id;
     }
 
+    public List<String> getAllSupplierName() {
+        List<String> sList = new ArrayList<>();
+        sql = "select name from supplier";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                String s = rs.getString("name");
+                sList.add(s);
+
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sList;
+    }
+
 }
