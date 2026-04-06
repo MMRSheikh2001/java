@@ -7,6 +7,7 @@ package poshomepractice.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,7 +52,9 @@ public class SalesDao implements DaoService<Sales> {
 
     @Override
     public List<Sales> findAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Sales> sList = new ArrayList<>();
+
+        return sList;
     }
 
     @Override

@@ -4,11 +4,22 @@
  */
 package poshomepractice.view;
 
+import java.util.List;
+import poshomepractice.dao.ProductDao;
+import poshomepractice.dao.SalesDao;
+import poshomepractice.model.Sales;
+import poshomepractice.util.SalesUtil;
+
 /**
  *
  * @author Admin
  */
 public class SalesView extends javax.swing.JFrame {
+
+    ProductDao pd = new ProductDao();
+    SalesUtil su = new SalesUtil();
+    SalesDao sd = new SalesDao();
+    Sales s;
 
     /**
      * Creates new form SalesView
@@ -16,6 +27,34 @@ public class SalesView extends javax.swing.JFrame {
     public SalesView() {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        loadProducts();
+        showSales();
+    }
+
+    public void loadProducts() {
+        cmbProductNames.removeAllItems();
+        cmbProductNames.addItem("--Select Product--");
+        List<String> pList = pd.getProductNames();
+        for (String p : pList) {
+            cmbProductNames.addItem(p);
+
+        }
+    }
+
+    public void clearData() {
+        txtSalesId.setText("");
+        txtSalesUnitPrice.setText("");
+        txtSalesQuantity.setText("");
+        txtSalesTotalPrice.setText("");
+        txtSalesDiscountRate.setText("");
+        txtSalesDiscountAmount.setText("");
+        txtSalesActualPrice.setText("");
+        cmbProductNames.setSelectedIndex(0);
+
+    }
+
+    public void showSales() {
+
     }
 
     /**
@@ -72,6 +111,8 @@ public class SalesView extends javax.swing.JFrame {
 
         jLabel2.setText("ID");
 
+        txtSalesId.setEditable(false);
+
         jLabel3.setText("Product Name");
 
         cmbProductNames.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -80,18 +121,44 @@ public class SalesView extends javax.swing.JFrame {
 
         jLabel5.setText("Quantity");
 
+        txtSalesQuantity.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSalesQuantityFocusLost(evt);
+            }
+        });
+
         jLabel6.setText("Total Price");
+
+        txtSalesTotalPrice.setEditable(false);
 
         jLabel7.setText("Discount Rate");
 
+        txtSalesDiscountRate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtSalesDiscountRateFocusLost(evt);
+            }
+        });
+
         jLabel8.setText("Discount Amount");
+
+        txtSalesDiscountAmount.setEditable(false);
 
         jLabel9.setText("Actual Price");
 
-        txtSalesActualPrice.setText("jTextField1");
+        txtSalesActualPrice.setEditable(false);
+        txtSalesActualPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSalesActualPriceActionPerformed(evt);
+            }
+        });
 
-        btnSell.setBackground(new java.awt.Color(0, 102, 0));
+        btnSell.setBackground(new java.awt.Color(51, 204, 0));
         btnSell.setText("Sell");
+        btnSell.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSellMouseClicked(evt);
+            }
+        });
 
         tblShowSales.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -193,6 +260,50 @@ public class SalesView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtSalesActualPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSalesActualPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSalesActualPriceActionPerformed
+
+    private void txtSalesQuantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalesQuantityFocusLost
+        // TODO add your handling code here:
+        try {
+            double unitPrice = Double.parseDouble(txtSalesUnitPrice.getText().trim());
+            double quantity = Double.parseDouble(txtSalesQuantity.getText().trim());
+            String totalPrice = su.getTotalPrice(unitPrice, quantity) + "";
+            txtSalesTotalPrice.setText(totalPrice);
+        } catch (Exception e) {
+        }
+
+    }//GEN-LAST:event_txtSalesQuantityFocusLost
+
+    private void txtSalesDiscountRateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSalesDiscountRateFocusLost
+        // TODO add your handling code here:
+
+        double totalPrice = Double.parseDouble(txtSalesTotalPrice.getText().trim());
+        double discountRate = Double.parseDouble(txtSalesDiscountRate.getText().trim());
+        double discountAmount = su.getDiscountAmount(totalPrice, discountRate);
+        txtSalesDiscountAmount.setText(discountAmount + "");
+        double actualPrice = su.getActualPrice(totalPrice, discountAmount);
+        txtSalesActualPrice.setText(actualPrice + "");
+
+
+    }//GEN-LAST:event_txtSalesDiscountRateFocusLost
+
+    private void btnSellMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSellMouseClicked
+        // TODO add your handling code here:
+        String productName = cmbProductNames.getSelectedItem().toString();
+        double unitPrice = Double.parseDouble(txtSalesUnitPrice.getText().trim());
+        double quantity = Double.parseDouble(txtSalesQuantity.getText().trim());
+        double totalPrice = Double.parseDouble(txtSalesTotalPrice.getText().trim());
+        double discount = Double.parseDouble(txtSalesDiscountRate.getText().trim());
+        double actualPrice = Double.parseDouble(txtSalesActualPrice.getText().trim());
+
+        s = new Sales(productName, unitPrice, quantity, totalPrice, discount, actualPrice);
+        sd.save(s);
+        clearData();
+
+    }//GEN-LAST:event_btnSellMouseClicked
 
     /**
      * @param args the command line arguments
