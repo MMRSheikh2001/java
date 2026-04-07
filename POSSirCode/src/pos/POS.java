@@ -19,15 +19,7 @@ public class POS {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        Category c = new Category("Apple");
-        
-        CategoryDao dao = new CategoryDao();
-        
-//        dao.save(c);
-        
-        Category c1 = dao.findById(1);
-        c1.setName("Banana");
-        dao.update(c1.getId());
+       
                 
         
         
