@@ -4,8 +4,7 @@
  */
 package pos;
 
-import pos.dao.CategoryDao;
-import pos.model.Category;
+
 
 /**
  *
@@ -18,6 +17,7 @@ public class POS {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
         
        
                 

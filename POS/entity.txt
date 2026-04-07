@@ -1,0 +1,36 @@
+1. Customer
+	a. id
+	b. name
+	c. cell
+	d. address
+	e. email
+
+2. Product
+	a. id
+	b. name
+	c. unitPrice
+	d. quantity
+	e. totalPrice
+	f. expDate
+
+3. Sales
+	a. id
+	b. unitPrice
+	c. quantity
+	d. totalPrice
+
+4. Category
+	a. id
+	b. name
+
+5. Stock
+	a. id
+	b. name
+	c. quantity
+	d. date
+6. Supplier
+	a. id
+	b. name
+	c. address
+	d. cell
+	e. email
