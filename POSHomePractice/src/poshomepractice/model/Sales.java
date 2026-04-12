@@ -24,6 +24,17 @@ public class Sales {
     public Sales() {
     }
 
+    public Sales(int id, String productName, double unitPrice, double quantity, double totalPrice, double discount, double actualPrice, Date date) {
+        this.id = id;
+        this.productName = productName;
+        this.unitPrice = unitPrice;
+        this.quantity = quantity;
+        this.totalPrice = totalPrice;
+        this.discount = discount;
+        this.actualPrice = actualPrice;
+        this.date = date;
+    }
+
     public Sales(int id, String productName, double unitPrice, double quantity, double totalPrice, double discount, double actualPrice) {
         this.id = id;
         this.productName = productName;

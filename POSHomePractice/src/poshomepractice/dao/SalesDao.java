@@ -7,6 +7,7 @@ package poshomepractice.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -53,6 +54,25 @@ public class SalesDao implements DaoService<Sales> {
     @Override
     public List<Sales> findAll() {
         List<Sales> sList = new ArrayList<>();
+        sql = "select * from sales";
+        try {
+            ps = db.getCon().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                java.sql.Date sqlDate = rs.getDate("date");
+                LocalDate localDate = sqlDate.toLocalDate();
+                Sales s = new Sales(rs.getInt("id"), rs.getString("productName"), rs.getDouble("unitPrice"),
+                        rs.getDouble("quantity"), rs.getDouble("totalPrice"),
+                        rs.getDouble("discount"), rs.getDouble("actualPrice"), sqlDate);
+                sList.add(s);
+
+            }
+            rs.close();
+            ps.close();
+            db.getCon().close();
+        } catch (SQLException ex) {
+            Logger.getLogger(SalesDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         return sList;
     }

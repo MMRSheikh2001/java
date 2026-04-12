@@ -1,5 +1,6 @@
 package poshomepractice;
 
+import poshomepractice.dao.SalesDao;
 import poshomepractice.dao.UserDao;
 import poshomepractice.model.User;
 import poshomepractice.view.Login;
@@ -18,9 +19,8 @@ public class POSHomePractice {
 //        UserDao ud = new UserDao();
 //        ud.saveUser(u);
 
-        Login l = new Login();
-        l.setVisible(true);
-        
+//        Login l = new Login();
+//        l.setVisible(true);
     }
-    
+
 }
