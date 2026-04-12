@@ -1,0 +1,20 @@
+ String dateString = "2023-12-31"; // Your input String
+
+ 1. Parse String to LocalDate
+LocalDate localDate = LocalDate.parse(dateString);
+
+2. Convert to java.sql.Date for the database
+java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
+
+3. Use in PreparedStatement
+pstmt.setDate(1, sqlDate);
+
+ 1. Get the sql.Date from the result set
+    java.sql.Date sqlDate = rs.getDate("date_column");
+
+     2. Convert to modern LocalDate (Recommended)
+    LocalDate localDate = sqlDate.toLocalDate();
+
+     3. (Optional) Turn it back into a formatted String for display
+    String formattedDate = localDate.toString(); // Default: YYYY-MM-DD
+    System.out.println("The date is: " + formattedDate);
