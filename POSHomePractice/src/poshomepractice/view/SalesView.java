@@ -59,6 +59,11 @@ public class SalesView extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(column);
         tblShowSales.setModel(model);
+        List<Sales> sList= sd.findAll();
+        for(Sales s: sList){
+        
+        
+        }
     }
 
     /**
