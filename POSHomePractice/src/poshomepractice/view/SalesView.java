@@ -4,6 +4,7 @@
  */
 package poshomepractice.view;
 
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import poshomepractice.dao.ProductDao;
@@ -16,7 +17,7 @@ import poshomepractice.util.SalesUtil;
  * @author Admin
  */
 public class SalesView extends javax.swing.JFrame {
-    
+
     ProductDao pd = new ProductDao();
     SalesUtil su = new SalesUtil();
     SalesDao sd = new SalesDao();
@@ -31,17 +32,17 @@ public class SalesView extends javax.swing.JFrame {
         loadProducts();
         showSales();
     }
-    
+
     public void loadProducts() {
         cmbProductNames.removeAllItems();
         cmbProductNames.addItem("--Select Product--");
         List<String> pList = pd.getProductNames();
         for (String p : pList) {
             cmbProductNames.addItem(p);
-            
+
         }
     }
-    
+
     public void clearData() {
         txtSalesId.setText("");
         txtSalesUnitPrice.setText("");
@@ -51,18 +52,18 @@ public class SalesView extends javax.swing.JFrame {
         txtSalesDiscountAmount.setText("");
         txtSalesActualPrice.setText("");
         cmbProductNames.setSelectedIndex(0);
-        
+
     }
-    
+
     public void showSales() {
         String[] column = {"SL", "Product Name", "Unit Price", "Quantity", "Total Price", "Discount", "Discount Amount", "Actual Price", "Date"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(column);
         tblShowSales.setModel(model);
-        List<Sales> sList= sd.findAll();
-        for(Sales s: sList){
-        
-        
+        List<Sales> sList = sd.findAll();
+        for (Sales s : sList) {
+            model.addRow(new Object[]{s.getId(), s.getProductName(), s.getUnitPrice(), s.getQuantity(), s.getTotalPrice(), s.getDiscount(), su.getDiscountAmount(s.getTotalPrice(), s.getDiscount()), s.getActualPrice(), s.getDate()});
+
         }
     }
 
@@ -295,7 +296,7 @@ public class SalesView extends javax.swing.JFrame {
         txtSalesDiscountAmount.setText(discountAmount + "");
         double actualPrice = su.getActualPrice(totalPrice, discountAmount);
         txtSalesActualPrice.setText(actualPrice + "");
-        
+
 
     }//GEN-LAST:event_txtSalesDiscountRateFocusLost
 
@@ -307,10 +308,11 @@ public class SalesView extends javax.swing.JFrame {
         double totalPrice = Double.parseDouble(txtSalesTotalPrice.getText().trim());
         double discount = Double.parseDouble(txtSalesDiscountRate.getText().trim());
         double actualPrice = Double.parseDouble(txtSalesActualPrice.getText().trim());
-        
+
         s = new Sales(productName, unitPrice, quantity, totalPrice, discount, actualPrice);
         sd.save(s);
         clearData();
+        showSales();
 
     }//GEN-LAST:event_btnSellMouseClicked
 
