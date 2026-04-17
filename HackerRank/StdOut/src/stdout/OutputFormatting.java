@@ -19,6 +19,7 @@ public class OutputFormatting {
             String s1 = sc.next();
             int x = sc.nextInt();
             //Complete this line
+            System.out.printf("%-15s%03d\n", s1, x);
         }
         System.out.println("================================");
 
