@@ -17,9 +17,15 @@ public class StringTokens {
         String s = scan.nextLine();
         // Write your code here.
         scan.close();
-        String[] sList = s.split("[^A-Za-z]+");
-        for (String p : sList) {
-            System.out.println(p);
+        if (s.isEmpty()) {
+            System.out.println(0);
+        } else {
+            String[] split = s.split("[ !,?._'@]+");
+
+            System.out.println(split.length);
+            for (String word : split) {
+                System.out.println(word);
+            }
         }
     }
 }
