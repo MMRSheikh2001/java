@@ -5,6 +5,7 @@
 package strings;
 
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -18,6 +19,16 @@ public class PatternSyntaxChecker {
         while (testCases > 0) {
             String pattern = in.nextLine();
             //Write your code
+            try {
+                //trying to compile pattern to check it's validity
+                Pattern.compile(pattern);
+                System.out.println("Valid");
+
+            } catch (Exception e) {
+                System.out.println("Invalid");
+            }
+
+            testCases--;
         }
     }
 }
