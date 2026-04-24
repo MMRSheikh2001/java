@@ -4,13 +4,21 @@
  */
 package miusamplequestions;
 
-/**Write a function to reverse an integer using numeric operators and without using any
- *arrays or other data structures.
- * The signature of the function is:
+/**
+ * Write a function to reverse an integer using numeric operators and without
+ * using any arrays or other data structures. The signature of the function is:
  * int f(int n)
  */
 public class ReverseInteger {
+
     public static void main(String[] args) {
-        
+
+    }
+
+    public static int reverseInteger(int n) {
+        int result = 0;
+
+        return result;
+
     }
 }
