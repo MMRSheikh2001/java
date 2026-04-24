@@ -13,16 +13,31 @@ package miusamplequestions;
  *
  */
 public class ArrayPointOfEquilibriam {
-    
+
     public static void main(String[] args) {
-        int[] arr = {};
+        int[] arr = {1,8,3,7,10,2};
         System.out.println(findArrayPointOfEquilibriam(arr));
     }
-    
+
     public static int findArrayPointOfEquilibriam(int[] arr) {
         int eqil = -1;
-        
+        for (int i = 1; i < arr.length; i++) {
+            int suma = 0;
+            int sumb = 0;
+            for (int j = 0; j < i; j++) {
+                suma += arr[j];
+            }
+            for (int k = arr.length - 1; k > i; k--) {
+                sumb += arr[k];
+            }
+            if (suma == sumb) {
+                eqil = i;
+                break;
+            }
+
+        }
+
         return eqil;
     }
-    
+
 }
