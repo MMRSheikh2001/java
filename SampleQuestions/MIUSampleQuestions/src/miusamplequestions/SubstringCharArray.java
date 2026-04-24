@@ -4,6 +4,8 @@
  */
 package miusamplequestions;
 
+import java.util.Arrays;
+
 /**
  * Write a function that accepts a character array, a zero-based start position
  * and a length. It should return a character array containing containing
@@ -15,16 +17,22 @@ package miusamplequestions;
 public class SubstringCharArray {
 
     public static void main(String[] args) {
-        
+        char[] arr = {'a', 'b', 'c', 'd'};
+        char[] cArr = substringCharArray(arr, 0, 5);
+        System.out.println(Arrays.toString(cArr));
     }
 
     public static char[] substringCharArray(char[] arr, int start, int len) {
-        char[] charArr = new char[len];
-        try {
-            
-        } catch (Exception e) {
+        if (len < 0 || start < 0 || start + len > arr.length) {
+            return null;
+
         }
-        
+        char[] charArr = new char[len];
+        for (int i = 0; i < len; i++) {
+
+            charArr[i] = arr[start + i];
+        }
+
         return charArr;
     }
 }
