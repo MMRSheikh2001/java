@@ -9,5 +9,8 @@ package leetcodeproblems;
  * @author Administrator
  */
 public class Swrt69 {
+    public static void main(String[] args) {
+        
+    }
     
 }
