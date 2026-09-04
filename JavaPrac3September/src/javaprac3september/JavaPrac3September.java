@@ -33,8 +33,9 @@ public class JavaPrac3September {
         System.out.println(reverseNumber(n));
 
         System.out.println(findFactorial(n));
-        
+
         generateFibonacci(n);
+        System.out.println(generateFibonacci(n));
 
     }
 
@@ -93,29 +94,36 @@ public class JavaPrac3September {
 
     }
 
-    public static void generateFibonacci(Integer n) {
+    public static List<Integer> generateFibonacci(Integer n) {
 
+        List<Integer> nums = new ArrayList<>();
         if (n == 1) {
-            System.out.println(0);
+
+            nums.add(0);
         } else if (n == 2) {
-            System.out.println(0);
-            System.out.println(1);
+
+            nums.add(0);
+            nums.add(1);
         } else if (n > 2) {
             int a = 0;
             int b = 1;
-            System.out.println(a);
-            System.out.println(b);
+
+            nums.add(0);
+            nums.add(1);
 
             for (int i = 2; i <= n; i++) {
 
                 int c = a + b;
-                System.out.println(c);
+
+                nums.add(c);
                 a = b;
                 b = c;
 
             }
 
         }
+
+        return nums;
     }
 
 }
