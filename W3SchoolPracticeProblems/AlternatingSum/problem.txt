@@ -1,0 +1,23 @@
+Alternating Sum
+Add and subtract numbers in turn.
+
+Instructions
+The first line of input contains N, the count of numbers.
+
+The second line contains N integers separated by spaces.
+
+Add the first number, subtract the second, add the third, subtract the fourth, and so on.
+
+Print the result.
+
+Input used in test:
+5
+1 2 3 4 5
+Important:
+To solve the problem your code has to return a correct result for other values as well. 
+Expected Output
+3
+Reason: 1 - 2 + 3 - 4 + 5 = 3
+
+Loop over the numbers with their index.
+Add the number when the index is even, subtract it when the index is odd.
