@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class FindTheDifference389 {
@@ -8,11 +9,23 @@ public class FindTheDifference389 {
 
 class Solution {
     public char findTheDifference(String s, String t) {
-        char[] tArr = new char[t.length()];
-        for (int i = 0; i < tArr.length; i++) {
-            tArr[i] = t.charAt(i);
+        List<Character> sList = new ArrayList<>();
+        for (char c : s.toCharArray()) {
+            sList.add(c);
         }
 
-        
+        List<Character> tList = new ArrayList<>();
+        for (char c : t.toCharArray()) {
+            tList.add(c);
+        }
+
+        for (Character item : sList) {
+            tList.remove(item);
+        }
+        char re = 'a';
+        for (Character c : tList) {
+            re = c;
+        }
+        return re;
     }
 }
